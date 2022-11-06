@@ -26,7 +26,7 @@ const chats = [
                 email: "dupon@gmail.com",
             },
         ],
-        _id: "1",
+        _id: "2",
         chatName: "Durand Wood",
     },
     {
@@ -41,7 +41,7 @@ const chats = [
                 email: "james@gmail.com",
             },
         ],
-        _id: "1",
+        _id: "3",
         chatName: "Lorem Ipsum",
     },
 ]
