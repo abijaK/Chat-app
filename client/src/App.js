@@ -1,7 +1,8 @@
 import './App.css';
 import { Route, Routes } from "react-router-dom";
-import  Home  from "./Components/Home.js";
-import Chats from "./Components/Chats.js";
+import  Home  from "./views/Home.js";
+import Chats from "./views/Chats.js";
+// import Login from './views/Login';
 
 function App() {
   return (
