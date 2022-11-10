@@ -1,14 +1,17 @@
 import React from 'react'
-import Login from './Login'
+import Signup from './Signup'
+// import Login from './Login'
 
 function Home() {
   return (
-    <div className='bg-img bg-cover h-full w-full'>
-      {/* <h1>Bienvenue sur Espace de Chat</h1> */}
+    // Construire ici l'espace d'interaction entre utilisateur
+    <div className='bg-wave-img bg-cover h-full w-full'>
+      {/* <h1>Bienvenue sur l'espace de Chat</h1> */}
       <head>
         <title></title>
       </head>
-      <Login />
+      {/* <Login /> */}
+      <Signup/>
     </div>
   )
 }
