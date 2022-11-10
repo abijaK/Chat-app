@@ -3,8 +3,11 @@ import Login from './Login'
 
 function Home() {
   return (
-    <div>
+    <div className='bg-img bg-cover h-full w-full'>
       {/* <h1>Bienvenue sur Espace de Chat</h1> */}
+      <head>
+        <title></title>
+      </head>
       <Login />
     </div>
   )
