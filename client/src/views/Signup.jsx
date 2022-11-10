@@ -22,7 +22,7 @@ function Signup() {
                   {/* Sign-up Button */}
                   <a className='loginBtn rounded-full py-2 px-12 border inline-block font-semibold bg-constancia-blue border-white text-white
                   hover:bg-white hover:text-cyan-900 hover:bg-opacity-40' 
-                      href='\'>Sign-in</a>
+                      href='/Login'>Sign-in</a>
                 </div>
                 
                 <div className='w-3/5 py-16 bg-white bg-opacity-40 gap-8 rounded-tr-2xl rounded-br-2xl flex flex-col items-center'>{/* Sign in section */}
@@ -53,13 +53,13 @@ function Signup() {
                       <div className="w-80 mb-5">
                         <label htmlFor="remember" className='text-xs flex justify-center space-x-4'>
                           <span className='flex text-cyan-900'>Allready have an account ?</span>
-                        <a href="/" className='text-cyan-900 hover:text-white underline outline-none font-semibold'>Sign in</a>
+                        <a href="/Login" className='text-cyan-900 hover:text-white underline outline-none font-semibold<'>Sign in</a>
                         </label>
                       </div>
 
                       {/* Login Button */}
-                      <a href='/' className='loginBtn w-80 rounded py-2 text-cyan-900 font-semibold bg-constancia-blue hover:text-white hover:bg-opacity-70'
-                      type="submit">Login</a>
+                      <a href='/' className='saveBtn w-80 rounded py-2 text-cyan-900 font-semibold bg-constancia-blue hover:text-white hover:bg-opacity-70'
+                      type="submit">Save</a>
                     </div>
                 </div>
           </div>
