@@ -1,13 +1,14 @@
 import './App.css';
 import { Route, Routes } from "react-router-dom";
-import  Home  from "./Components/Home.js";
-import Chats from "./Components/Chats.js";
+import Chats from "./views/Chats.js";
+import Signup from './views/Signup';
+// import Login from './views/Login';
 
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Home/>} exact />
+        <Route path="/" element={<Signup/>} exact />
         <Route path="/chats" element={<Chats/>} />
       </Routes>
     </div>
