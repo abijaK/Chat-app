@@ -1,9 +1,11 @@
 const server = require('express');
-const chats = require('./Data/db');
+const chats = require('./config/db');
 const app = server();
 const dotenv = require('dotenv');
+dotenv.config();
 
 const PORT = process.env.PORT || 9000;
+const userRoutes = require('./routes/userRoutes.routes')
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*')
@@ -13,6 +15,8 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => {
     res.send('API is running')
 })
+
+app.use('/api/user', userRoutes)
 
 app.get('/api/chats', (req,res) => {
     res.send(chats)
