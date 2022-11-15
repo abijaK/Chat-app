@@ -1,18 +1,20 @@
-const asyncHandler = require('express-async-handler');
 const User = require('../models/user.models');
-const generateToken = require('../config/generateToken')
+const asyncHandler = require('express-async-handler') 
+const generateToken = require('../config/generateToken');
 
 const registerUser = asyncHandler(async (req, res) => {
-    const { name, email, password, pic} = req.body;
+    const { name, email, password, picture} = req.body;
 
+    // Check all fields are not empty
     if (!name || !email || !password) {
         res.status(400);
         throw new Error("Please enter all the fields")
     }
 
     // Let check if User exist in BD
-    const userExists = await User.findOne({ email});
+    const userExists = await User.findOne({ email });
 
+    // Check if user already exists
     if (userExists) {
         res.status(400);
         throw new Error("User already exists");
@@ -24,9 +26,10 @@ const registerUser = asyncHandler(async (req, res) => {
         email,
         password,
         picture,
-        token: generateToken(user._id),
+        
     });
 
+    
     // Check if user has been created successfuly
     if (user) {
         res.status(201).json({
@@ -34,11 +37,13 @@ const registerUser = asyncHandler(async (req, res) => {
             name: user.name,
             email : user.email,
             password : user.password,
-            picture : user.picture
+            picture : user.picture,
+            token: generateToken(user._id),
         })
     }else {
+
         res.status(400);
         throw new Error("Failed to Create the User")
     }
 });
-module.exports = { registerUser }
+module.exports =  registerUser; 
