@@ -26,5 +26,7 @@ app.options(/.*/,(req, res) => {
 
 app.use(routes);
 
+// app.use(endPointNotFound)
+// app.use(errorHandler)
 
 app.listen(PORT, ()=>{console.log(`Server started on PORT ${PORT}`)})

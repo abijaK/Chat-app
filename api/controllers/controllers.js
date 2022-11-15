@@ -28,8 +28,7 @@ const registerUser = asyncHandler(async (req, res) => {
         picture,
         
     });
-
-    
+   
     // Check if user has been created successfuly
     if (user) {
         res.status(201).json({
@@ -41,9 +40,9 @@ const registerUser = asyncHandler(async (req, res) => {
             token: generateToken(user._id),
         })
     }else {
-
         res.status(400);
         throw new Error("Failed to Create the User")
     }
+
 });
 module.exports =  registerUser; 

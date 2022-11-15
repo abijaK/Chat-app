@@ -2,12 +2,13 @@ const mongoose = require('mongoose');
 const mongooseUniqueValid = require('mongoose-unique-validator');
 
     const userModel = mongoose.Schema({
-        // name
+
         name: { type: String, required: true },
-        // email
+
         email: { type: String, required: true, unique: true },
-        // password
+
         password: { type: String, required: true },
+        
         picture: {
             type: String,
             default: "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
@@ -16,6 +17,8 @@ const mongooseUniqueValid = require('mongoose-unique-validator');
     }, 
         { timestamps: true }
 );
+
+    
 
 mongoose.plugin(mongooseUniqueValid);
 
