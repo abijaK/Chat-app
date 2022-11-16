@@ -4,6 +4,7 @@ const express = require('express');
 const PORT = process.env.PORT || 5000;
 const routes = require('./routes/routes');
 const dbConnexion = require('./config/dbConnect');
+const { endPointNotFound, errorHandler } = require('./middlewares/error.middlewares');
 
 const app = express();
 
@@ -26,7 +27,7 @@ app.options(/.*/,(req, res) => {
 
 app.use(routes);
 
-// app.use(endPointNotFound)
-// app.use(errorHandler)
+app.use(endPointNotFound)
+app.use(errorHandler)
 
 app.listen(PORT, ()=>{console.log(`Server started on PORT ${PORT}`)})
