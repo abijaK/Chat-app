@@ -1,10 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FaRegEnvelope, FaEye} from 'react-icons/fa';
 import { MdLockOutline } from "react-icons/md";
 
 function Login() {
+
+  const [name, setName] = useState(); 
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [confirmpassword, setConfirmpassword] = useState();
+  const [pict, setPict] = useState();
+
   return (
-    <div className="bg-img bg-cover
+    <div className="bg-img container mx-auto bg-cover
           flex flex-col items-center justify-center min-h-screen py-2 ">
         <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
           <div className="bg-cabin-blue  bg-opacity-40 rounded-tl-2xl rounded-tr-2xl shadow-2xl flex w-2/3 max-w-4xl">
@@ -16,7 +23,8 @@ function Login() {
               {/* Sign-up Button */}
               <a className='loginBtn rounded-full py-2 px-12 border inline-block font-semibold bg-constancia-blue border-white text-white
               hover:bg-white hover:text-cyan-900 hover:bg-opacity-40' 
-                  href='/Signup'>Sign-up</a>
+                  href='/register'
+                  >Sign-up</a>
             </div>
               <div className="text-left text-white font-bold absolute mt-5 ml-8 border-b border-r rounded border-teal-100 
                 px-2"><a href="/" className='outline-none'>Design<span className='text-cyan-900'>AK</span></a></div>
@@ -26,11 +34,11 @@ function Login() {
                 </div>
                 <div className="input-item w-80 p-2 gap-2 bg-white rounded flex items-center">
                     <FaRegEnvelope className='email text-gray-500 m-2'/>
-                    <input className='pl-2 outline-none text-sm flex-1' type="text" name='email' placeholder='Email'/>
+                    <input isRequired className='pl-2 outline-none text-sm flex-1' type="text" name='email' placeholder='Email'/>
                 </div>
                 <div className="input-item w-80 p-2 gap-2 bg-white rounded flex items-center flex-row-reverse">
                     <FaEye className='password text-gray-500'/>
-                    <input className='pl-2 outline-none text-sm flex-1' type="text" name='password'placeholder='Password'/>
+                    <input isRequired className='pl-2 outline-none text-sm flex-1' type="text" name='password'placeholder='Password'/>
                     <div><MdLockOutline className='password text-.5xl text-gray-500 m-2'/></div>
                 </div>
                 <div className="input-item">
@@ -43,7 +51,8 @@ function Login() {
 
                   {/* Sign-up Button */}
                   <a href='/Chat' className='loginBtn w-80 rounded py-2 text-cyan-900 font-semibold bg-constancia-blue hover:text-white hover:bg-opacity-70'
-                   type="submit">Login</a>
+                   type="submit"
+                   >Login</a>
                 </div>
             </div>
           </div>
