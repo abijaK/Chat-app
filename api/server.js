@@ -10,8 +10,6 @@ const app = express();
 
 dbConnexion();
 
-// console.log(process.env.BD_URL);
-
 app.use(express.json())
 
 app.use((req, res, next) => {

@@ -25,8 +25,7 @@ const registerUser = asyncHandler(async (req, res) => {
         name,
         email,
         password,
-        picture,
-        
+        picture
     });
    
     // Check if user has been created successfuly
