@@ -7,6 +7,7 @@ function Chats() {
   const fetchAllChats = async() => {
     const {data} = await axios.get('http://127.0.0.1:9000/api/chats/')
     setchats(data);
+    console.log(data);
   }
 
   useEffect(() => {
@@ -16,8 +17,17 @@ function Chats() {
   
   return (
     <div>
-        {/* This is chat page */}
-        { chats.map((chat) => (<div key={chat._id}>{chat.chatName}</div>))}
+
+        {Array.isArray(chats) 
+          ?  
+        chats.map((chat) => {
+          return(
+          <div key={chat._id}>
+            <h2>{chat.chatName}</h2>
+            </div>          
+          )})
+          : null}
+
     </div>
   )
 }
