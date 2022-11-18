@@ -1,10 +1,22 @@
-import React from 'react'
-import { FaRegEnvelope, FaEyeSlash} from 'react-icons/fa';
+import React, { useState } from 'react'
+import { FaRegEnvelope, FaEyeSlash, FaEye} from 'react-icons/fa';
 import { MdOutlineDriveFileRenameOutline, MdLockOutline } from "react-icons/md";
 
 function Signup() {
+
+  const [showPass, setShowPass] = useState(false)
+  const [showConfirmPass, setShowConfirmPass] = useState(false)
+  // const [name, setName] = useState(); 
+  // const [email, setEmail] = useState();
+  // const [password, setPassword] = useState();
+  // const [confirmpassword, setConfirmpassword] = useState();
+  // const [pict, setPict] = useState();
+
+  const handleClickPass = () => setShowPass(!showPass)
+  const handleClickConfP = () => setShowConfirmPass(!showConfirmPass)
+
   return (
-    <div className="bg-wave-img bg-cover container mx-auto
+    <div className="bg-wave-img bg-cover mx-auto
           flex flex-col items-center justify-center min-h-screen py-2 ">
       <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center ">
             <div className="bg-cabin-blue  bg-opacity-40 rounded-2xl shadow-2xl flex w-2/3 max-w-4xl">
@@ -31,22 +43,42 @@ function Signup() {
                     </div>
                     <div className="input-item w-80 p-2 gap-2 bg-white rounded flex items-center">
                         <MdOutlineDriveFileRenameOutline className='name text-gray-500 m-2'/>
-                        <input className='pl-2 outline-none text-sm flex-1' type="text" name='name' placeholder='Name'/>
+                        <input className='pl-2 outline-none text-sm flex-1' type="text" 
+                        name='name' placeholder='Your Name'/>
                     </div>
                     <div className="input-item w-80 p-2 gap-2 bg-white rounded flex items-center">
                         <FaRegEnvelope className='email text-gray-500 m-2'/>
-                        <input className='pl-2 outline-none text-sm flex-1 bg-white' type="text" name='email' placeholder='Email'/>
+                        <input className='pl-2 outline-none text-sm flex-1 bg-white' type="text" 
+                        name='email' placeholder='Your Email'/>
                     </div>
                     <div className="input-item w-80 p-2 gap-2 bg-white rounded flex items-center flex-row-reverse">
-                        {/* <FaEye className='password text-gray-500'/> */}
-                        <FaEyeSlash className='password text-gray-500'/>
-                        <input className='pl-2 outline-none text-sm flex-1' type="text" name='password'placeholder='Password'/>
+                          {/* Button show|hide password-icon*/}
+                            <button onClick={handleClickPass}>
+                              {
+                              showPass ? <FaEye className='password text-gray-500'/> 
+                                : 
+                                <FaEyeSlash className='password text-gray-500'/>
+                              }
+                          </button>
+                          <input className='pl-2 outline-none text-sm flex-1' 
+                          name='password'
+                          type={showPass ? "text" : "password"}
+                          placeholder='Your Password'/>
                         <div><MdLockOutline className='password text-.5xl text-gray-500 m-2'/></div>
                     </div>
                     <div className="input-item w-80 p-2 gap-2 bg-white rounded flex items-center flex-row-reverse">
-                        {/* <FaEye className='password text-gray-500'/> */}
-                        <FaEyeSlash className='password text-gray-500'/>
-                        <input className='pl-2 outline-none text-sm flex-1' type="text" name='password'placeholder='Confirm password'/>
+                         {/* Button show|hide password-icon*/}
+                         <button onClick={handleClickConfP}>
+                              {
+                              showConfirmPass ? <FaEye className='password text-gray-500'/> 
+                                : 
+                                <FaEyeSlash className='confirmPassword text-gray-500'/>
+                              }
+                          </button>
+                          <input className='pl-2 outline-none text-sm flex-1' 
+                          name='confirmPassword'
+                          type={showConfirmPass ? "text" : "password"}
+                          placeholder='Confirm your Password'/>
                         <div><MdLockOutline className='password text-.5xl text-gray-500 m-2'/></div>
                     </div>
                     <div className="input-item">

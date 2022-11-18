@@ -1,6 +1,6 @@
 import React from 'react'
-import Signup from './Signup'
-// import Login from './Login'
+// import Login from '../components/Authentication/Login'
+import Signup from '../components/Authentication/Signup'
 
 function Home() {
   return (

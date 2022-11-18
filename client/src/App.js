@@ -1,8 +1,8 @@
 import './App.css';
 import { Route, Routes } from "react-router-dom";
-import Chats from "./views/Chats.js";
-import Signup from './views/Signup';
 import Login from './components/Authentication/Login';
+import Signup from './components/Authentication/Signup';
+import Chats from './components/Chats';
 
 function App() {
   return (

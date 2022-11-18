@@ -1,17 +1,20 @@
 import React, { useState } from 'react'
-import { FaRegEnvelope, FaEye} from 'react-icons/fa';
+import { FaRegEnvelope, FaEye, FaEyeSlash} from 'react-icons/fa';
 import { MdLockOutline } from "react-icons/md";
 
 function Login() {
 
-  const [name, setName] = useState(); 
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [confirmpassword, setConfirmpassword] = useState();
-  const [pict, setPict] = useState();
+  const [show, setShow] = useState(false)
+  // const [email, setEmail] = useState();
+  // const [password, setPassword] = useState();
+  const [submit, setSubmit] = useState();
+  // const [pict, setPict] = useState();
+
+  const handleClick = () => setShow(!show)
+  const onSubmit = () => setSubmit()
 
   return (
-    <div className="bg-img container mx-auto bg-cover
+    <div className="bg-img mx-auto bg-cover
           flex flex-col items-center justify-center min-h-screen py-2 ">
         <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
           <div className="bg-cabin-blue  bg-opacity-40 rounded-tl-2xl rounded-tr-2xl shadow-2xl flex w-2/3 max-w-4xl">
@@ -34,11 +37,26 @@ function Login() {
                 </div>
                 <div className="input-item w-80 p-2 gap-2 bg-white rounded flex items-center">
                     <FaRegEnvelope className='email text-gray-500 m-2'/>
-                    <input isRequired className='pl-2 outline-none text-sm flex-1' type="text" name='email' placeholder='Email'/>
+                    <input isRequired className='pl-2 outline-none text-sm flex-1' type="text" 
+                      name='email' placeholder='Your Email'
+                    onChange={(e) => setEmail(e.target.value)}/>
                 </div>
                 <div className="input-item w-80 p-2 gap-2 bg-white rounded flex items-center flex-row-reverse">
-                    <FaEye className='password text-gray-500'/>
-                    <input isRequired className='pl-2 outline-none text-sm flex-1' type="text" name='password'placeholder='Password'/>
+
+                  {/* Button show|hide password-icon*/}
+                  <button onClick={handleClick}>
+                    {
+                    show ? <FaEye className='password text-gray-500'/> 
+                      : 
+                      <FaEyeSlash className='password text-gray-500'/>
+                    }
+                  </button>
+                  
+                    
+                    <input isRequired className='pl-2 outline-none text-sm flex-1' 
+                    name='password' placeholder='Your Password'
+                    type={show ? "text" : "password"} 
+                    onChange={(e) => setPassword(e.target.value)}/>
                     <div><MdLockOutline className='password text-.5xl text-gray-500 m-2'/></div>
                 </div>
                 <div className="input-item">
@@ -52,7 +70,7 @@ function Login() {
                   {/* Sign-up Button */}
                   <a href='/Chat' className='loginBtn w-80 rounded py-2 text-cyan-900 font-semibold bg-constancia-blue hover:text-white hover:bg-opacity-70'
                    type="submit"
-                   >Login</a>
+                   onClick={onSubmit}>Login</a>
                 </div>
             </div>
           </div>
