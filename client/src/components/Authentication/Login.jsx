@@ -5,13 +5,16 @@ import { MdLockOutline } from "react-icons/md";
 function Login() {
 
   const [show, setShow] = useState(false)
-  // const [email, setEmail] = useState();
-  // const [password, setPassword] = useState();
-  const [submit, setSubmit] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
   // const [pict, setPict] = useState();
+  const [submit, setSubmit] = useState();
 
   const handleClick = () => setShow(!show)
-  const onSubmit = () => setSubmit()
+  const submitHandler = () => setSubmit((e) => {
+    e.preventDefault();
+  })
+  console.log(email, password)
 
   return (
     <div className="bg-img mx-auto bg-cover
@@ -37,7 +40,7 @@ function Login() {
                 </div>
                 <div className="input-item w-80 p-2 gap-2 bg-white rounded flex items-center">
                     <FaRegEnvelope className='email text-gray-500 m-2'/>
-                    <input isRequired className='pl-2 outline-none text-sm flex-1' type="text" 
+                    <input className='pl-2 outline-none text-sm flex-1' type="text" 
                       name='email' placeholder='Your Email'
                     onChange={(e) => setEmail(e.target.value)}/>
                 </div>
@@ -53,7 +56,7 @@ function Login() {
                   </button>
                   
                     
-                    <input isRequired className='pl-2 outline-none text-sm flex-1' 
+                    <input className='pl-2 outline-none text-sm flex-1' 
                     name='password' placeholder='Your Password'
                     type={show ? "text" : "password"} 
                     onChange={(e) => setPassword(e.target.value)}/>
@@ -68,9 +71,9 @@ function Login() {
                   </div>
 
                   {/* Sign-up Button */}
-                  <a href='/Chat' className='loginBtn w-80 rounded py-2 text-cyan-900 font-semibold bg-constancia-blue hover:text-white hover:bg-opacity-70'
+                  <a href='/' className='loginBtn w-80 rounded py-2 text-cyan-900 font-semibold bg-constancia-blue hover:text-white hover:bg-opacity-70'
                    type="submit"
-                   onClick={onSubmit}>Login</a>
+                   onClick={submitHandler}>Login</a>
                 </div>
             </div>
           </div>

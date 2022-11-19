@@ -5,9 +5,9 @@ function Chats() {
  const [chats, setchats] = useState([]);
 
   const fetchAllChats = async() => {
-    const {data} = await axios.get('http://127.0.0.1:9000/api/chats/')
+    const {data} = await axios.get('http://127.0.0.1:9000/api/user/')
     setchats(data);
-    console.log(data);
+    console.log(chats);
   }
 
   useEffect(() => {

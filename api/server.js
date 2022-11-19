@@ -18,7 +18,6 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*')
     next()
 })
-
 app.options(/.*/,(req, res) => {
     res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE')
     res.setHeader('Access-Control-Allow-Headers', '*')
@@ -31,7 +30,7 @@ app.use(routes);
 //     res.send('API is running')
 // })
 
-// app.use('/api/user', userRoutes)
+app.use('/api/user', routes)
 
 // app.get('/api/chats', (req,res) => {
 //     res.send(chats)
