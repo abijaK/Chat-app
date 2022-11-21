@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from 'react'
 import { FaRegEnvelope, FaEyeSlash, FaEye} from 'react-icons/fa';
 import { MdOutlineDriveFileRenameOutline, MdLockOutline } from "react-icons/md";
@@ -13,9 +14,22 @@ function Signup() {
   // const [pict, setPict] = useState();
   const [submit, setSubmit] = useState();
 
-  const handleClickPass = () => setShowPass(!showPass)
-  const handleClickConfP = () => setShowConfirmPass(!showConfirmPass)
-  const submitHandler = () => setSubmit()
+  // Show or hide entered password
+  const handleClickPass = () => setShowPass(!showPass);
+
+  // Show or hide entered confirm password
+  const handleClickConfP = () => setShowConfirmPass(!showConfirmPass);
+
+  // Send registration to the backend
+  const submitHandler = () => {
+    axios.post("http://localhost:9000/api/user",
+      {
+        name,
+        email,
+        password
+      }
+    )
+  }
 
   return (
     <div className="bg-wave-img bg-cover mx-auto
@@ -36,7 +50,7 @@ function Signup() {
                   {/* Sign-up Button */}
                   <a className='loginBtn rounded-full py-2 px-12 border inline-block font-semibold bg-constancia-blue border-white text-white
                   hover:bg-white hover:text-cyan-900 hover:bg-opacity-40' 
-                      href='/Login'>Sign-in</a>
+                      href='/'>Sign-in</a>
                 </div>
                 
                 <div className='w-3/5 py-16 bg-white bg-opacity-40 gap-6 rounded-tr-2xl rounded-br-2xl flex flex-col items-center'>{/* Sign in section */}
@@ -45,13 +59,13 @@ function Signup() {
                     </div>
                     <div className="input-item w-80 p-2 gap-2 bg-white rounded flex items-center">
                         <MdOutlineDriveFileRenameOutline className='name text-gray-500 m-2'/>
-                        <input className='pl-2 outline-none text-sm flex-1' type="text" 
+                          <input className='pl-2 outline-none text-sm flex-1' type="text" 
                         name='name' placeholder='Your Name'
                           onChange={(e) => setName(e.target.value)}/>
                     </div>
                     <div className="input-item w-80 p-2 gap-2 bg-white rounded flex items-center">
                         <FaRegEnvelope className='email text-gray-500 m-2'/>
-                        <input className='pl-2 outline-none text-sm flex-1 bg-white' type="text" 
+                          <input className='pl-2 outline-none text-sm flex-1 bg-white' type="text" 
                         name='email' placeholder='Your Email'
                           onChange={(e) => setEmail(e.target.value)}/>
                     </div>
@@ -64,6 +78,7 @@ function Signup() {
                                 <FaEyeSlash className='password text-gray-500'/>
                               }
                           </button>
+                          
                           <input className='pl-2 outline-none text-sm flex-1' 
                           name='password'
                           type={showPass ? "text" : "password"}
@@ -80,6 +95,7 @@ function Signup() {
                                 <FaEyeSlash className='confirmPassword text-gray-500'/>
                               }
                           </button>
+                          
                           <input className='pl-2 outline-none text-sm flex-1' 
                           name='confirmPassword'
                           type={showConfirmPass ? "text" : "password"}
@@ -99,12 +115,12 @@ function Signup() {
                         <label htmlFor="remember" className='text-xs flex justify-center space-x-4'>
                           <span className='flex items-end text-gray-900'>Already have an account ?</span>
                         <a href="/Login" className='text-gray-900 hover:text-white underline outline-none font-medium'>Sign in</a>
-                        </label>
+                        </label> 
                       </div>
 
                       {/* Login Button */}
-                      <a href='/' className='saveBtn w-80 rounded py-2 text-cyan-900 font-semibold bg-constancia-blue hover:text-white hover:bg-opacity-70'
-                      type="submit" onClick={submitHandler}>Save</a>
+                      <button href='/' className='saveBtn w-80 rounded py-2 text-cyan-900 font-semibold bg-constancia-blue hover:text-white hover:bg-opacity-70'
+                      type="submit" onClick={submitHandler}>Save</button>
                     </div>
                 </div>
           </div>

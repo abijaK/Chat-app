@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaRegEnvelope, FaEye, FaEyeSlash} from 'react-icons/fa';
 import { MdLockOutline } from "react-icons/md";
+import axios from "axios";
 
 function Login() {
 
@@ -10,12 +11,35 @@ function Login() {
   // const [pict, setPict] = useState();
   const [submit, setSubmit] = useState();
 
-  const handleClick = () => setShow(!show)
-  const submitHandler = () => setSubmit((e) => {
-    e.preventDefault();
-  })
-  console.log(email, password)
+  const [connected, setConnected] = useState(false);
 
+  const [data, setData] = useState([]);
+
+  // Send login data to the backend and retrieves all users from database
+  useEffect(() => {
+    axios.get("http://localhost:9000/api/users").then((response) => {
+      setData(response.data);
+      console.log(response.data);
+    })
+  }, [])
+  
+  // Show or hide entered password
+  const handleClick = () => setShow(!show)
+
+  // Check if user credentials is the same in database
+  const submitHandler = () => {
+    const user = data.filter((userData) => {
+      return userData.email === email && userData.password === password
+    })
+    
+    // Show Chatroom if user is loged in
+    if (user) {
+      setConnected(true)
+    }
+  }
+
+  if (!connected) {
+  
   return (
     <div className="bg-img mx-auto bg-cover
           flex flex-col items-center justify-center min-h-screen py-2 ">
@@ -55,7 +79,6 @@ function Login() {
                     }
                   </button>
                   
-                    
                     <input className='pl-2 outline-none text-sm flex-1' 
                     name='password' placeholder='Your Password'
                     type={show ? "text" : "password"} 
@@ -71,15 +94,22 @@ function Login() {
                   </div>
 
                   {/* Sign-up Button */}
-                  <a href='/' className='loginBtn w-80 rounded py-2 text-cyan-900 font-semibold bg-constancia-blue hover:text-white hover:bg-opacity-70'
+                  <button className='loginBtn w-80 rounded py-2 text-cyan-900 font-semibold bg-constancia-blue hover:text-white hover:bg-opacity-70'
                    type="submit"
-                   onClick={submitHandler}>Login</a>
+                   onClick={submitHandler}>Login</button>
                 </div>
             </div>
           </div>
         </main>
     </div>
-  )
+  ) 
+    } else{
+      return (
+        <div>
+          <h3>Utilisateur connected</h3>
+        </div>
+      )
+    }
 }
 
 export default Login

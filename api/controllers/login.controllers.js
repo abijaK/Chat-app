@@ -1,7 +1,14 @@
-// const User = require("../models/user.models")
+const User = require("../models/user.models")
 
-// const goToChat = async((req, res)=> {
-//     const {email, password } = req.body;
+const goToChat = async(req, res)=> {
+    // const user = await User.find();
+    // res.json(user)
+    // console.log(user);
 
-//     const user = await User.findOne({ email });
-// })
+    User.find().then((data) => {
+        res.json(data);
+        console.log(data);
+    })
+}
+
+module.exports = goToChat;

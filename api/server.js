@@ -26,14 +26,13 @@ app.options(/.*/,(req, res) => {
 
 app.use(routes);
 
-// app.get('/', (req, res) => {
-//     res.send('API is running')
-// })
 
-app.use('/api/user', routes)
+// app.use('/api/user', routes)
+
+// app.use('/api/users', routes)
 
 // app.get('/api/chats', (req,res) => {
-//     res.send(chats)
+    //     res.send(chats)
 // })
 
 // app.get('/api/chat/:id', (req, res) => {
