@@ -5,7 +5,8 @@ module.exports = {
     extend: {
       backgroundImage: {
         "img" : "url('../src/assets/loginImage.jpg')",
-        "wave-img" : "url('../src/assets/waves_water.jpg')"
+        "wave-img" : "url('../src/assets/waves_water.jpg')",
+        "whitedress" : "url('../src/assets/whitedress.jpg')"
       },
       colors: {
         'cabin-blue':'#7cbcbb',
