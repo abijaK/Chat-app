@@ -5,7 +5,7 @@ const messages = async(req, res, next) => {
     const msg = await Message.find();
     try {
         if (msg) {
-            return msg;
+            res.json({ message: newMessage });
         }
     } catch (error) {
         next(error);

@@ -9,7 +9,6 @@ function Login() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   // const [pict, setPict] = useState();
-  const [submit, setSubmit] = useState();
 
   const [connected, setConnected] = useState(false);
 
@@ -19,7 +18,6 @@ function Login() {
   useEffect(() => {
     axios.get("http://localhost:9000/api/users").then((response) => {
       setData(response.data);
-      console.log(response.data);
     })
   }, [])
   
@@ -104,11 +102,12 @@ function Login() {
     </div>
   ) 
     } else{
-      return (
         <div>
           <h3>Utilisateur connected</h3>
+          {
+            // console.log(data)
+          }
         </div>
-      )
     }
 }
 

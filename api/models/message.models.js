@@ -9,9 +9,9 @@ const messageModel = mongoose.Schema({
         type: String,
         trim: true
     },
-    chat:{
+    receiver:{
         type: mongoose.Types.ObjectId,
-        ref: 'Chat'
+        ref: 'User'
     }
 });
 
