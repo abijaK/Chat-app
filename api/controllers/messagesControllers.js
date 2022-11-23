@@ -1,8 +1,8 @@
-import Message from "../models/message.models";
+const Message = require("../models/message.models.js");
 
 // Retrieve all message sended
 const messages = async(req, res, next) => {
-    const msg = await Message.find({_id : req._id});
+    const msg = await Message.find();
     try {
         if (msg) {
             return msg;

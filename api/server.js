@@ -2,7 +2,6 @@ const dotenv = require('dotenv');
 dotenv.config();
 const express = require('express');
 const PORT = process.env.PORT || 5000;
-// const chats = require('./config/data');
 const routes = require('./routes/routes');
 const dbConnexion = require('./config/dbConnect');
 const { endPointNotFound, errorHandler } = require('./middlewares/error.middlewares');

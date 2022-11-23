@@ -1,12 +1,13 @@
 const router = require('express').Router();
 
-const registerUser  = require('../controllers/register.controllers');
-// const  { userAuth }  = require('../controllers/password.controllers');
-const loginUser = require('../controllers/login.controllers')
+const registerUser  = require('../controllers/auth/register.controllers');
+const loginUser = require('../controllers/auth/login.controllers');
+const { messages } = require('../controllers/messagesControllers');
 
 
-router.route('/api/user').post(registerUser)
-router.get('/api/users', loginUser)
 // router.route('/login').post(userAuth)
+router.post('/api/user', registerUser);
+router.get('/api/users', loginUser);
+router.post('/api/chats', messages)
 
 module.exports = router;

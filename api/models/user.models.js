@@ -4,11 +4,11 @@ const mongooseUniqueValid = require('mongoose-unique-validator');
 
     const userModel = mongoose.Schema({
 
-        name: { type: String, required: true },
+        name: { type: String, required: true, min: 3, max: 25 },
 
         email: { type: String, required: true, unique: true },
 
-        password: { type: String, required: true },
+        password: { type: String, required: true, min: 8 },
         
         picture: {
             type: String,
