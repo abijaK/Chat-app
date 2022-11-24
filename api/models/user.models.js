@@ -19,10 +19,6 @@ const mongooseUniqueValid = require('mongoose-unique-validator');
         { timestamps: true }
 );
 
-    // Compare entered password with password stored in DB
-    userModel.methods.matchPassword = async function(enteredPassword){
-        return await bcrypt.compare(enteredPassword, this.password)
-    }
 
     // Crypts password before saving
     userModel.pre("save", async function(next){

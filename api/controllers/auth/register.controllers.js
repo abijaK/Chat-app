@@ -37,25 +37,24 @@ const registerUser = asyncHandler(async (req, res) => {
     });
    
     // Check if user has been created successfuly
-    if (user) {
-        res.status(201).json({
-            _id: user._id,
-            name: user.name,
-            email : user.email,
-            password : user.password,
-            picture : user.picture,
-            token: generateToken(user._id),
-        })
-    }else {
-        res.status(400);
-        throw new Error("Failed to Create the User")
+    try {
+        if (user) {
+            res.status(201).json({
+                _id: user._id,
+                name: user.name,
+                email : user.email,
+                password : user.password,
+                picture : user.picture,
+                token: generateToken(user._id),
+            })
+        }else {
+            res.status(400);
+            throw new Error("Failed to Create the User")
+        }
+    } catch (error) {
+        console.log(error);
     }
 
 });
 
-// const registerUser = (req, res) => {
-//     const user = new User({...req.body});
-//     console.log(user);
-//     user.save();    
-//}
 module.exports =  registerUser; 

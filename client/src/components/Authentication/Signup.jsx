@@ -29,10 +29,11 @@ function Signup() {
         password
       }
     )
+    
   }
 
   return (
-    <div className="bg-wave-img bg-cover mx-auto
+    <div className="bg-img bg-cover mx-auto
           flex flex-col items-center justify-center min-h-screen py-2 ">
       <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center ">
             <div className="bg-cabin-blue  bg-opacity-40 rounded-2xl shadow-2xl flex w-2/3 max-w-4xl">
