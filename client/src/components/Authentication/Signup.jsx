@@ -22,7 +22,7 @@ function Signup() {
 
   // Send registration to the backend
   const submitHandler = () => {
-    axios.post("http://localhost:9000/api/user",
+    axios.post("http://localhost:9000/auth/user",
       {
         name,
         email,

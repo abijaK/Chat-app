@@ -64,8 +64,9 @@ const getAllUsers = async (req, res, next) => {
 
 // Get the profile of user
 const getUsersProfile = async(req, res, next) => {
+
+    const allUsers = {};
     try {
-        const allUsers = {};
         const users = await User.find({}, ["name", "picture"]);
 
         if (!users) {
@@ -85,14 +86,24 @@ const getUsersProfile = async(req, res, next) => {
     }
 }
 
-// Delete a single user
-const deleteSingleUser = async(req, res, next) => {
-    User.deleteOne({ name: { $eq: name } })
-    .then(() => {
-        console.log("User deleted");
-    }).catch((error) => {
-        console.log(error);
-    })
+// Delete a single document of user
+const deleteSingleUser = async(req, res) => {
+    
+    const { params } = req;
+    const { userID } = params;
+
+    try {
+        await User.deleteOne({ 'user._id': userID });
+
+        const name = User.findOne({}).then((nom) => {
+            return res.json({ 
+                userID, 
+                msg:`${nom.name} was deleted successfuly!` 
+            })
+        });
+    } catch (error) {
+        throw error;
+    }
 }
 
 module.exports = { 
