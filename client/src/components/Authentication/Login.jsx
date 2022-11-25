@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { FaRegEnvelope, FaEye, FaEyeSlash} from 'react-icons/fa';
-import { MdLockOutline } from "react-icons/md";
 import axios from "axios";
+import React, { useState } from 'react'
+import { MdLockOutline } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
+import { FaRegEnvelope, FaEye, FaEyeSlash} from 'react-icons/fa';
 
 function Login() {
 const navigate=useNavigate()
@@ -11,20 +13,12 @@ const navigate=useNavigate()
   const [password, setPassword] = useState();
   // const [pict, setPict] = useState();
 
-  const [connected, setConnected] = useState(false);
-
   const [data, setData] = useState(undefined);
 
-  // Send login data to the backend and retrieves all users from database
-  // useEffect(() => {
-  //   axios.get("http://localhost:9000/api/users").then((response) => {
-  //     setData(response.data);
-  //   })
-  // }, [])
-  
   // Show or hide entered password
   const handleClick = () => setShow(!show)
 console.log(email,password);
+  
   // Check if user credentials is the same in database
   const submitHandler = (e) => {
     e.preventDefault();
@@ -36,32 +30,65 @@ console.log(email,password);
       
     ).then((responses)=>{
 
+      /**
+       * const response = {
+       *  statusText:"OK",
+       *  status:200,
+       *  body:""
+       * }
+       * 
+       * //Then use them essentialy
+       * if(response[status])
+       * {...}
+       */
+      
+      
+      // Show Chatroom if user is logged in
       if(responses.data.status===true){
         setData(responses.data)
-       navigate("/chats")
+
+        // Notifies with success
+        toast.error("Check your fields please!", {
+          position: toast.POSITION.BOTTOM_RIGHT
+        });
+
+        // Make redirection to the chat-room component
+        navigate("/chats")
       }else{
         console.log("status:false");
+
+        // Notifies with Error
+        toast.error("Error: Check your fields please!", {
+          position: toast.POSITION.BOTTOM_RIGHT
+        });
+
+        // Keeps Login page to throw user errors 
         navigate("/")
-      }
+      }  
       
+      // Stores user informations when he's logged in
+      const localData =
+        {
+          id:responses.data._id,
+          name:responses.data.name,
+          token:responses.data.token,
+        }
+
+      console.log(localData);
+
+      localStorage.setItem("user", JSON.stringify(localData))  
+
+      // console.log(responses.data);
       
     }).catch((err)=>{
       console.log(err);
     })
-   
     
-    // Show Chatroom if user is loged in
-   
-   
   }
-console.log(data);
-  
   
   return (
-    <div className="bg-img mx-auto bg-cover
-          flex flex-col items-center justify-center 
-           min-h-screen py-2 ">
-        <main className="md:w-[120vw] flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
+    <div className="bg-img mx-auto bg-cover flex flex-col items-center justify-center min-h-screen py-2 ">
+        <main className="md:w-[100vw] flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
           <div className="bg-cabin-blue  bg-opacity-40 rounded-tl-2xl rounded-tr-2xl shadow-2xl flex w-2/3 max-w-4xl">
             <div className='w-2/5 text-white rounded-tl-2xl py-36 px-12'>{/* Sign up section */}
               <h3 className='text-3xl font-bold mb-2'>Goto Sign-in</h3>
@@ -76,13 +103,15 @@ console.log(data);
             </div>
               <div className="text-left text-white font-bold absolute mt-5 ml-8 border-b border-r rounded border-teal-100 
                 px-2"><a href="/" className='outline-none'>Design<span className='text-cyan-900'>AK</span></a></div>
-            <div className='w-3/5 py-16 bg-white bg-opacity-40 gap-8 rounded-tr-2xl rounded-bl-2xl flex flex-col items-center'>{/* Sign in section */}
+            
+              {/* FORM Section */}
+              <form className='w-3/5 py-16 bg-white bg-opacity-40 gap-8 rounded-tr-2xl rounded-bl-2xl flex flex-col items-center' 
+                  onSubmit={(e)=>submitHandler(e)}>
+
                 <div className='text-3xl text-center text-cyan-900 font-bold'><h2>Sign-in</h2>
                   <div className="border-2 w-14 border-constancia-blue inline-block"></div>{/* Barre */}
                 </div>
 
-                <form className='w-3/5 py-16 bg-white bg-opacity-40 gap-8 rounded-tr-2xl rounded-bl-2xl flex flex-col items-center' 
-                onSubmit={(e)=>submitHandler(e)}>
                     <div className="input-item w-80 p-2 gap-2 bg-white rounded flex items-center">
                         <FaRegEnvelope className='email text-gray-500 m-2'/>
                         <input className='pl-2 outline-none text-sm flex-1' type="text" 
@@ -121,9 +150,11 @@ console.log(data);
                     </div>
                 </form>
 
-            </div>
           </div>
         </main>
+      
+      <ToastContainer/>
+
     </div>
   ) 
     
