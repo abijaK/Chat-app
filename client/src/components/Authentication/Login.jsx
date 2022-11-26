@@ -7,7 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { FaRegEnvelope, FaEye, FaEyeSlash} from 'react-icons/fa';
 
 function Login() {
-const navigate=useNavigate()
+const navigate = useNavigate()
   const [show, setShow] = useState(false)
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -48,11 +48,11 @@ console.log(email,password);
         setData(responses.data)
 
         // Notifies with success
-        toast.error("Check your fields please!", {
+        toast.success("Connected successfuly!", {
           position: toast.POSITION.BOTTOM_RIGHT
         });
 
-        // Make redirection to the chat-room component
+        // Redirects to the chat-room component
         navigate("/chats")
       }else{
         console.log("status:false");
@@ -62,7 +62,7 @@ console.log(email,password);
           position: toast.POSITION.BOTTOM_RIGHT
         });
 
-        // Keeps Login page to throw user errors 
+        // Keeps on Login page to throw user errors 
         navigate("/")
       }  
       
