@@ -2,7 +2,6 @@ import './App.css';
 import { Route, Routes } from "react-router-dom";
 import Login from './components/Authentication/Login';
 import Signup from './components/Authentication/Signup';
-// import Chats from './components/Chats';
 import ChatRoom from './components/chatRoom/ChatRoom';
 
 function App() {

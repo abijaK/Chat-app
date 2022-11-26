@@ -19,21 +19,17 @@ const mongooseUniqueValid = require('mongoose-unique-validator');
         { timestamps: true }
 );
 
-    // Compare entered password with password stored in DB
-    // userModel.methods.matchPassword = async function(enteredPassword){
-    //     return await bcrypt.compare(enteredPassword, this.password)
-    // }
 
-    // // Crypts password before saving
-    // userModel.pre("save", async function(next){
-    //     if (!this.isModified) {
-    //         next();
-    //     }
+    // Crypts password before saving
+    userModel.pre("save", async function(next){
+        if (!this.isModified) {
+            next();
+        }
 
-    //     // Generate a new password crypted
-    //     const salt = await bcrypt.genSalt(10)
-    //     this.password = await bcrypt.hash(this.password, salt)
-    // })
+        // Generate a new password crypted
+        const salt = await bcrypt.genSalt(10)
+        this.password = await bcrypt.hash(this.password, salt)
+    })
 
 
 mongoose.plugin(mongooseUniqueValid);

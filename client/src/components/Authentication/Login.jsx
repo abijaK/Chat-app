@@ -1,49 +1,94 @@
-import React, { useEffect, useState } from 'react'
-import { FaRegEnvelope, FaEye, FaEyeSlash} from 'react-icons/fa';
-import { MdLockOutline } from "react-icons/md";
 import axios from "axios";
+import React, { useState } from 'react'
+import { MdLockOutline } from "react-icons/md";
+import { useNavigate } from 'react-router-dom';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
+import { FaRegEnvelope, FaEye, FaEyeSlash} from 'react-icons/fa';
 
 function Login() {
-
+const navigate = useNavigate()
   const [show, setShow] = useState(false)
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   // const [pict, setPict] = useState();
-  const [submit, setSubmit] = useState();
 
-  const [connected, setConnected] = useState(false);
+  const [data, setData] = useState(undefined);
 
-  const [data, setData] = useState([]);
-
-  // Send login data to the backend and retrieves all users from database
-  useEffect(() => {
-    axios.get("http://localhost:9000/api/users").then((response) => {
-      setData(response.data);
-      console.log(response.data);
-    })
-  }, [])
-  
   // Show or hide entered password
   const handleClick = () => setShow(!show)
-
+console.log(email,password);
+  
   // Check if user credentials is the same in database
-  const submitHandler = () => {
-    const user = data.filter((userData) => {
-      return userData.email === email && userData.password === password
+  const submitHandler = (e) => {
+    e.preventDefault();
+   axios.post("http://localhost:9000/auth/login",
+      {
+        email,
+        password
+      }
+      
+    ).then((responses)=>{
+
+      /**
+       * const response = {
+       *  statusText:"OK",
+       *  status:200,
+       *  body:""
+       * }
+       * 
+       * //Then use them essentialy
+       * if(response[status])
+       * {...}
+       */
+      
+      
+      // Show Chatroom if user is logged in
+      if(responses.data.status===true){
+        setData(responses.data)
+
+        // Notifies with success
+        toast.success("Connected successfuly!", {
+          position: toast.POSITION.BOTTOM_RIGHT
+        });
+
+        // Redirects to the chat-room component
+        navigate("/chats")
+      }else{
+        console.log("status:false");
+
+        // Notifies with Error
+        toast.error("Error: Check your fields please!", {
+          position: toast.POSITION.BOTTOM_RIGHT
+        });
+
+        // Keeps on Login page to throw user errors 
+        navigate("/")
+      }  
+      
+      // Stores user informations when he's logged in
+      const localData =
+        {
+          id:responses.data._id,
+          name:responses.data.name,
+          token:responses.data.token,
+        }
+
+      console.log(localData);
+
+      localStorage.setItem("user", JSON.stringify(localData))  
+
+      // console.log(responses.data);
+      
+    }).catch((err)=>{
+      console.log(err);
     })
     
-    // Show Chatroom if user is loged in
-    if (user) {
-      setConnected(true)
-    }
   }
-
-  if (!connected) {
   
   return (
-    <div className="bg-img mx-auto bg-cover
-          flex flex-col items-center justify-center min-h-screen py-2 ">
-        <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
+    <div className="bg-img mx-auto bg-cover flex flex-col items-center justify-center min-h-screen py-2 ">
+        <main className="md:w-[100vw] flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
           <div className="bg-cabin-blue  bg-opacity-40 rounded-tl-2xl rounded-tr-2xl shadow-2xl flex w-2/3 max-w-4xl">
             <div className='w-2/5 text-white rounded-tl-2xl py-36 px-12'>{/* Sign up section */}
               <h3 className='text-3xl font-bold mb-2'>Goto Sign-in</h3>
@@ -58,58 +103,61 @@ function Login() {
             </div>
               <div className="text-left text-white font-bold absolute mt-5 ml-8 border-b border-r rounded border-teal-100 
                 px-2"><a href="/" className='outline-none'>Design<span className='text-cyan-900'>AK</span></a></div>
-            <div className='w-3/5 py-16 bg-white bg-opacity-40 gap-8 rounded-tr-2xl rounded-bl-2xl flex flex-col items-center'>{/* Sign in section */}
+            
+              {/* FORM Section */}
+              <form className='w-3/5 py-16 bg-white bg-opacity-40 gap-8 rounded-tr-2xl rounded-bl-2xl flex flex-col items-center' 
+                  onSubmit={(e)=>submitHandler(e)}>
+
                 <div className='text-3xl text-center text-cyan-900 font-bold'><h2>Sign-in</h2>
                   <div className="border-2 w-14 border-constancia-blue inline-block"></div>{/* Barre */}
                 </div>
-                <div className="input-item w-80 p-2 gap-2 bg-white rounded flex items-center">
-                    <FaRegEnvelope className='email text-gray-500 m-2'/>
-                    <input className='pl-2 outline-none text-sm flex-1' type="text" 
-                      name='email' placeholder='Your Email'
-                    onChange={(e) => setEmail(e.target.value)}/>
-                </div>
-                <div className="input-item w-80 p-2 gap-2 bg-white rounded flex items-center flex-row-reverse">
 
-                  {/* Button show|hide password-icon*/}
-                  <button onClick={handleClick}>
-                    {
-                    show ? <FaEye className='password text-gray-500'/> 
-                      : 
-                      <FaEyeSlash className='password text-gray-500'/>
-                    }
-                  </button>
-                  
-                    <input className='pl-2 outline-none text-sm flex-1' 
-                    name='password' placeholder='Your Password'
-                    type={show ? "text" : "password"} 
-                    onChange={(e) => setPassword(e.target.value)}/>
-                    <div><MdLockOutline className='password text-.5xl text-gray-500 m-2'/></div>
-                </div>
-                <div className="input-item">
-                  <div className="w-80 mb-5">
-                    <label htmlFor="remember" className='text-xs flex justify-between'>
-                      <span className='flex text-cyan-900'><input type="checkbox" name='remember' className='mr-1' />Remember me</span>
-                    <a href="/edit/password" className='text-cyan-900 font-semibold'>Forgot Password ?</a>
-                    </label>
-                  </div>
+                    <div className="input-item w-80 p-2 gap-2 bg-white rounded flex items-center">
+                        <FaRegEnvelope className='email text-gray-500 m-2'/>
+                        <input className='pl-2 outline-none text-sm flex-1' type="text" 
+                          name='email' placeholder='Your Email'
+                        onChange={(e) => setEmail(e.target.value)}/>
+                    </div>
+                    <div className="input-item w-80 p-2 gap-2 bg-white rounded flex items-center flex-row-reverse">
 
-                  {/* Sign-up Button */}
-                  <button className='loginBtn w-80 rounded py-2 text-cyan-900 font-semibold bg-constancia-blue hover:text-white hover:bg-opacity-70'
-                   type="submit"
-                   onClick={submitHandler}>Login</button>
-                </div>
-            </div>
+                      {/* Button show|hide password-icon*/}
+                      <span onClick={handleClick}>
+                        {
+                        show ? <FaEye className='password text-gray-500'/> 
+                          : 
+                          <FaEyeSlash className='password text-gray-500'/>
+                        }
+                      </span>
+                      
+                        <input className='pl-2 outline-none text-sm flex-1' 
+                        name='password' placeholder='Your Password'
+                        type={show ? "text" : "password"} 
+                        onChange={(e) => setPassword(e.target.value)}/>
+                        <div><MdLockOutline className='password text-.5xl text-gray-500 m-2'/></div>
+                    </div>
+                    <div className="input-item">
+                      <div className="w-80 mb-5">
+                        <label htmlFor="remember" className='text-xs flex justify-between'>
+                          <span className='flex text-cyan-900'><input type="checkbox" name='remember' className='mr-1' />Remember me</span>
+                        <a href="/edit/password" className='text-cyan-900 font-semibold'>Forgot Password ?</a>
+                        </label>
+                      </div>
+
+                      {/* Sign-up Button */}
+                      <button className='loginBtn w-80 rounded py-2 text-cyan-900 font-semibold bg-constancia-blue hover:text-white hover:bg-opacity-70'
+                      type="submit"
+                      >Login</button>
+                    </div>
+                </form>
+
           </div>
         </main>
+      
+      <ToastContainer/>
+
     </div>
   ) 
-    } else{
-      return (
-        <div>
-          <h3>Utilisateur connected</h3>
-        </div>
-      )
-    }
+    
 }
 
 export default Login

@@ -26,7 +26,7 @@ app.options(/.*/,(req, res) => {
 app.use(routes);
 
 
-// app.use('/api/user', routes)
+// app.use('/auth/user', routes)
 
 // app.use('/api/users', routes)
 
@@ -39,7 +39,7 @@ app.use(routes);
 //     res.send(oneChat);
 // })
 
-app.use(endPointNotFound)
-app.use(errorHandler)
+// app.use(endPointNotFound)
+// app.use(errorHandler)
 
 app.listen(PORT, ()=>{console.log(`Server started on PORT ${PORT}`)})

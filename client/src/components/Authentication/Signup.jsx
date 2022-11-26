@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useState } from 'react'
 import { FaRegEnvelope, FaEyeSlash, FaEye} from 'react-icons/fa';
 import { MdOutlineDriveFileRenameOutline, MdLockOutline } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 
 function Signup() {
 
@@ -12,7 +14,8 @@ function Signup() {
   const [password, setPassword] = useState();
   const [confirmpassword, setConfirmpassword] = useState();
   // const [pict, setPict] = useState();
-  const [submit, setSubmit] = useState();
+  
+  const navigate = useNavigate("");
 
   // Show or hide entered password
   const handleClickPass = () => setShowPass(!showPass);
@@ -22,17 +25,38 @@ function Signup() {
 
   // Send registration to the backend
   const submitHandler = () => {
-    axios.post("http://localhost:9000/api/user",
+    axios.post("http://localhost:9000/auth/user",
       {
         name,
         email,
         password
       }
     )
+    if(name && email && password){
+
+    // Notifies with success
+    toast.success("Saved successfuly !", {
+      position: toast.POSITION.BOTTOM_RIGHT
+    });
+
+    // Redirects to Login component
+    navigate("/")
+  }else{
+    console.log("status:false");
+
+    // Notifies with Error
+    toast.error("Error: Check your fields please!", {
+      position: toast.POSITION.BOTTOM_RIGHT
+    });
+
+    // Keeps on Sign up page to throw user errors 
+    navigate("/register")
+  }  
+    
   }
 
   return (
-    <div className="bg-wave-img bg-cover mx-auto
+    <div className="bg-img h-[100vh] mx-auto
           flex flex-col items-center justify-center min-h-screen py-2 ">
       <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center ">
             <div className="bg-cabin-blue  bg-opacity-40 rounded-2xl shadow-2xl flex w-2/3 max-w-4xl">
@@ -107,8 +131,8 @@ function Signup() {
                       <div className="w-80 mb-5 flex flex-col items-start">
                         <label class="block mb-2 text-sm font- text-gray-900 dark:text-white" for="multiple_files">Upload your picture</label>
                         <input className="block w-full text-sm text-gray-600 border  rounded cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="multiple_files" type="file" multiple />
-                        {/* <label className='text-cyan-900 mb-2' htmlFor="picture">Upload your Picture</label>
-                        <input className='w-30 text-xs text-cyan-900' name='picture' type="file" accept='image/*'/> */}
+                        <label className='text-cyan-900 mb-2' htmlFor="picture">Upload your Picture</label>
+                        <input className='w-30 text-xs text-cyan-900' name='picture' type="file" accept='image/*'/>
                       </div>
 
                       <div className="w-80 mb-3 flex">
@@ -125,6 +149,7 @@ function Signup() {
                 </div>
           </div>
         </main>
+        <ToastContainer />
     </div>
   )
 }

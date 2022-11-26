@@ -1,3 +1,7 @@
 .bg-whitedress{
     max-height: 100vh;
 }
+
+.chatroom, .wraper{
+    height: 100vh;
+}
