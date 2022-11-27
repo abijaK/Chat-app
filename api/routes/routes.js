@@ -3,7 +3,7 @@ const router = require('express').Router();
 const registerUser  = require('../controllers/auth/register.controllers');
 const userLogged = require('../controllers/auth/login.controllers');
 
-const { messages } = require('../controllers/messages.controllers');
+const { showMessages, addMessage } = require('../controllers/messages.controllers');
 const { getAllUsers, getUsersProfile, deleteSingleUser } = require('../controllers/user.controllers');
 
 
@@ -17,6 +17,8 @@ router.get('/users/profile', getUsersProfile);
 
 router.delete('/users/delete/:userID', deleteSingleUser);
 
-router.post('/discuss/chats', messages);
+router.post('/discuss/chats/add/', addMessage);
+
+router.get('/discuss/chats/show/', showMessages);
 
 module.exports = router;

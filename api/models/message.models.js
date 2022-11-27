@@ -9,7 +9,7 @@ const messageModel = mongoose.Schema({
         type: String,
         trim: true
     },
-    receiver:{
+    reciever:{
         type: mongoose.Types.ObjectId,
         ref: 'User'
     }
