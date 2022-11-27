@@ -87,7 +87,7 @@ const getUsersProfile = async(req, res, next) => {
 }
 
 // Delete a single document of user
-const deleteSingleUser = async(req, res) => {
+const deleteSingleUser = async(req, res, next) => {
     
     const { params } = req;
     const { userID } = params;
@@ -102,7 +102,7 @@ const deleteSingleUser = async(req, res) => {
             })
         });
     } catch (error) {
-        throw error;
+        next(error);
     }
 }
 

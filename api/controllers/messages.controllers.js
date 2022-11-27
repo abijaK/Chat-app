@@ -1,11 +1,11 @@
 const Message = require("../models/message.models.js");
 
 // Retrieve all message sended
-const messages = async(req, res, next) => {
+const showMessages = async(req, res, next) => {
     const msg = await Message.find();
     try {
         if (msg) {
-            res.json({ message: newMessage });
+            res.json({ message: msg });
         }
     } catch (error) {
         next(error);
@@ -19,4 +19,4 @@ const addMessage =async(req, res) => {
     res.json({ message: newMessage });
 }
 
-module.exports = {messages, addMessage}
+module.exports = {showMessages, addMessage}
