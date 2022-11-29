@@ -11,6 +11,7 @@ function ChatRoom() {
   const [reciever, setReciever] = useState("");
   const [recentUser, setRecentUser] = useState("");
   const [showMoreRecent, setShowMoreRecent] = useState("");
+  const [newMessage, setNewMessage] = useState("")
 
   return (
     <div className="bg-whitedress bg-cover bg-no-repeat h-full flex justify-center flex-col items-center">
@@ -21,8 +22,13 @@ function ChatRoom() {
             content={content} setContent={setContent}
             reciever={reciever} setReciever={setReciever}
             recentUser={recentUser} setRecentUser={setRecentUser}
+            newMessage={newMessage} setNewMessage={setNewMessage}
             showMoreRecent={showMoreRecent} setShowMoreRecent={setShowMoreRecent}/>
-        <Discussion />
+        <Discussion 
+          sender={sender} setSender={setSender}
+          content={content} setContent={setContent}
+          reciever={reciever} setReciever={setReciever}
+          newMessage={newMessage} setNewMessage={setNewMessage}/>
       </div>
     </div>
   );

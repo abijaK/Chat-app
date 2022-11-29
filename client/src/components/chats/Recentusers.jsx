@@ -1,8 +1,9 @@
 import axios from 'axios'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
-function Recentusers({ recentUser, setRecentUser }) {
+function Recentusers({ reciever, setReciever, recentUser, setRecentUser }) {
 
+  
 useEffect(() => {
   axios.get("http://localhost:9000/users")
   .then((response)=> {
@@ -11,11 +12,13 @@ useEffect(() => {
   }).catch((error) => console.error(error))
   
 }, []);
- console.log(recentUser);
+//  console.log(recentUser);
 
- const pushRecent = (element) => {
-    reciever.push(element);
- }
+console.log(reciever)
+
+  // const pushRecent = (element) => {
+  //     setReciever((state)=>[...state,element])
+  // }
   return (
     <div className="recent-side flex flex-col gap-3 justify-start">
           <form className="flex items-center">
@@ -64,10 +67,14 @@ useEffect(() => {
 
             <div className="flow-root">
               <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-              { recentUser &&
+              { 
+              
+              recentUser &&
                   recentUser.map((item) => {
+                    
                     return (
-                              <li key={item._id} className="py-3 sm:py-4">
+                              <li onClick={()=> setReciever(item._id)} 
+                              key={item._id} className="py-3 sm:py-4">
                                 <div className="flex items-center space-x-4">
                                   <div className="flex-shrink-0 w-12 h-12 rounded-full">
                                     {/* {item.picture} */}
