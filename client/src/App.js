@@ -6,24 +6,13 @@ import Signup from './components/auth/Signup';
 import ChatRoom from './components/chats/ChatRoom';
 
 function App() {
-  const [sender, setSender] = useState("");
-  const [content, setContent] = useState("");
-  const [reciever, setReciever] = useState("");
-  const [recentUser, setRecentUser] = useState("");
-  const [showMoreRecent, setShowMoreRecent] = useState("");
 
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Login/>} exact />
         <Route path="/register" element={<Signup/>} exact />
-        <Route path="/chats" element={
-          <ChatRoom 
-            setSender={setSender}
-            setContent={setContent}
-            setReciever={setReciever}
-            setRecentUser={setRecentUser}
-            setShowMoreRecent={setShowMoreRecent}/>} />
+        <Route path="/chats" element={<ChatRoom/>} />
       </Routes>
     </div>
   );

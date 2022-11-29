@@ -56,7 +56,7 @@ function Signup() {
   }
 
   return (
-    <div className="bg-img h-[100vh] mx-auto
+    <div className="bg-img bg-cover h-[100vh] mx-auto
           flex flex-col items-center justify-center min-h-screen py-2 ">
       <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center ">
             <div className="bg-cabin-blue  bg-opacity-40 rounded-2xl shadow-2xl flex w-2/3 max-w-4xl">
@@ -95,13 +95,13 @@ function Signup() {
                     </div>
                     <div className="input-item w-80 p-2 gap-2 bg-white rounded flex items-center flex-row-reverse">
                           {/* Button show|hide password-icon*/}
-                            <button onClick={handleClickPass}>
+                            <span onClick={handleClickPass}>
                               {
                               showPass ? <FaEye className='password text-gray-500'/> 
                                 : 
                                 <FaEyeSlash className='password text-gray-500'/>
                               }
-                          </button>
+                          </span>
                           
                           <input className='pl-2 outline-none text-sm flex-1' 
                           name='password'
@@ -112,13 +112,13 @@ function Signup() {
                     </div>
                     <div className="input-item w-80 p-2 gap-2 bg-white rounded flex items-center flex-row-reverse">
                          {/* Button show|hide confirmPassword-icon*/}
-                         <button onClick={handleClickConfP}>
+                         <span onClick={handleClickConfP}>
                               {
                               showConfirmPass ? <FaEye className='password text-gray-500'/> 
                                 : 
                                 <FaEyeSlash className='confirmPassword text-gray-500'/>
                               }
-                          </button>
+                          </span>
                           
                           <input className='pl-2 outline-none text-sm flex-1' 
                           name='confirmPassword'
@@ -131,8 +131,6 @@ function Signup() {
                       <div className="w-80 mb-5 flex flex-col items-start">
                         <label class="block mb-2 text-sm font- text-gray-900 dark:text-white" for="multiple_files">Upload your picture</label>
                         <input className="block w-full text-sm text-gray-600 border  rounded cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="multiple_files" type="file" multiple />
-                        <label className='text-cyan-900 mb-2' htmlFor="picture">Upload your Picture</label>
-                        <input className='w-30 text-xs text-cyan-900' name='picture' type="file" accept='image/*'/>
                       </div>
 
                       <div className="w-80 mb-3 flex">

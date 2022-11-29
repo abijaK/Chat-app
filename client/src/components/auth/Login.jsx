@@ -5,8 +5,10 @@ import { useNavigate } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import { FaRegEnvelope, FaEye, FaEyeSlash} from 'react-icons/fa';
+// const HOST_URL=process.env.BASE_URL;
 
 function Login() {
+
 const navigate = useNavigate()
   const [show, setShow] = useState(false)
   const [email, setEmail] = useState();
@@ -22,7 +24,7 @@ console.log(email,password);
   // Check if user credentials is the same in database
   const submitHandler = (e) => {
     e.preventDefault();
-   axios.post("http://localhost:9000/auth/login",
+   axios.post(`http://localhost:9000/auth/login`,
       {
         email,
         password
@@ -69,7 +71,7 @@ console.log(email,password);
       // Stores user informations when he's logged in
       const localData =
         {
-          id:responses.data._id,
+          idSender:responses.data._id,
           name:responses.data.name,
           token:responses.data.token,
         }

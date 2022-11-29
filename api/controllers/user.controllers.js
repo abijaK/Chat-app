@@ -16,7 +16,7 @@ const registerUser = asyncHandler(async (req, res) => {
     
     if (userExists) {
         res.status(400);
-        throw new Error("User already exists");
+        res.send("User already exists");
     }
 
     const user = await User.create({
@@ -52,9 +52,9 @@ const getAllUsers = async (req, res, next) => {
             })
         }else{
            
-        console.log("Users are availables")
+        console.log("Users are availables");
         
-        return res.status(200).json({ user })
+        return res.status(200).json({ user });
         }
         
     } catch (error) {
