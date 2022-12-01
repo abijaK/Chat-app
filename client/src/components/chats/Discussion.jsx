@@ -1,23 +1,36 @@
 import axios from 'axios';
-import React from 'react'
+import React, { useEffect } from 'react'
 // const HOST_URL=process.env.BASE_URL;
 
-function Discussion({ sender, setSender, contents, setContents, reciever, setReciever}) {
+function Discussion({  contents, setContents, reciever, reciever_name, setReciever_name }) {
 
+    
     // Retrieves the currentID of the sender from localStorage
-    const currentID = JSON.parse(localStorage.getItem("user")).id;
-
+    const currentID = JSON.parse(localStorage.getItem("user")).idSender;
+    console.log("Discussion", currentID);
+    
     // Post sender._id with message's content to the reciever
     const submitHandler = (e) => {
         e.preventDefault();
         axios.post("http://localhost:9000/discuss/chats/add/",
             {
                 sender:currentID,
-                contents,
-                reciever
+                content:contents,
+                reciever:reciever
             }
-    )}
-    console.log("Discussion", reciever);
+            )}
+    
+    useEffect(() => {
+        
+        axios.get(`http://localhost:9000/discuss/chats/show/${currentID}`)
+        .then((response)=>{
+                setReciever_name(response.data.content)
+        }).catch(error => {
+            console.log(error);
+        }) 
+    }, []);
+
+    console.log(reciever_name);
   return (
         <div className="w-full p-4 bg-white border rounded-lg shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700">
             <div className="flex flex-col justify-between divide-y divide-gray-200">
@@ -31,7 +44,7 @@ function Discussion({ sender, setSender, contents, setContents, reciever, setRec
                     </div>
                     <div className="flex-1 min-w-0 text-center">
                         <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                            Neil Sims
+                            {reciever_name}
                         </p>
                         <p className="text-sm text-gray-500 truncate dark:text-gray-400">
                             Online
@@ -40,14 +53,39 @@ function Discussion({ sender, setSender, contents, setContents, reciever, setRec
                 </div>
     
                 <div className="bodyChatRoom mt-3 h-[65vh]">
-                    <div className="flex-shrink-0 w-12 ">
-                    <img
-                        className="rounded-full mt-3"
-                        src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144"
-                        alt="use img"
-                    />
+                    <div id="messages" className="flex flex-col space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
+                       
+                        <div className="chat-message">
+                            <div className="flex items-end">
+                                <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
+                                    <div><span className="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600">Can be verified on any platform using docker</span></div>
+                                    </div>
+                                    <img src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="My profile" className="w-6 h-6 rounded-full order-1" />
+                            </div>
+                        </div>
+                        <div className="chat-message">
+                            <div className="flex items-end justify-end">
+                                <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
+                                    <div><span className="px-4 py-2 rounded-lg inline-block bg-blue-600 text-white ">Are you using sudo?</span></div>
+                                    </div>
+                                    <img src="https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="My profile" className="w-6 h-6 rounded-full order-2" />
+                            </div>
+                        </div>
                     </div>
                 </div>
+                {/* <div className="bodyChatRoom mt-3 h-[65vh]">
+                    <div className="flex-shrink-0 w-12 ">
+                        <div className='flex'>
+                            <div className=''></div>
+                            <div className='fluid'><h3>Hello world</h3></div>
+                        </div>
+                        <img
+                            className="rounded-full mt-3"
+                            src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144"
+                            alt="use img"
+                        />
+                        </div>
+                </div> */}
     
                 <div className="footerChatRoom">
                     <div className="border-t-1 border-gray-200 px-4 pt-4 mb-2 sm:mb-0">
@@ -76,10 +114,11 @@ function Discussion({ sender, setSender, contents, setContents, reciever, setRec
                             </span>
     
                         {/* Message input */}
-                            <form onChange={(e) => {submitHandler(e)}} className='w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 pl-12 bg-gray-200 rounded-md'>
+                            <form className='w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 pl-12 bg-gray-200 rounded-md'>
                                 <input
                                 type="text"
                                 placeholder="Write your message!"
+                                onChange={(e) => setContents(e.target.value)}
                                 className="w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 bg-gray-200 rounded-md py-3"
                                 />
                             </form>
@@ -111,9 +150,9 @@ function Discussion({ sender, setSender, contents, setContents, reciever, setRec
                                     </svg>
                                 </button>
     
-                                <button
+                                <button onClick={submitHandler}
                                     type="button"
-                                    className="inline-flex items-center justify-center rounded-lg px-4 py-3 transition duration-500 ease-in-out text-white bg-blue-500 hover:bg-blue-400 focus:outline-none"
+                                    className="inline-flex items-center justify-center rounded-lg px-4 py-3 transition duration-500 ease-in-out text-white bg-cyan-700 hover:bg-cyan-900 focus:outline-none"
                                 >
                                     <span className="font-bold">Send</span>
                                     <svg

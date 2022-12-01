@@ -39,7 +39,7 @@ app.use(routes);
 //     res.send(oneChat);
 // })
 
-// app.use(endPointNotFound)
-// app.use(errorHandler)
+app.use(endPointNotFound)
+app.use(errorHandler)
 
 app.listen(PORT, ()=>{console.log(`Server started on PORT ${PORT}`)})

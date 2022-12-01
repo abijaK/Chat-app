@@ -1,7 +1,7 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
-function Recentusers({ reciever, setReciever, recentUser, setRecentUser }) {
+function Recentusers({ reciever, setReciever, recentUser, setRecentUser, reciever_name, setReciever_name }) {
 
   
 useEffect(() => {
@@ -15,6 +15,13 @@ useEffect(() => {
 //  console.log(recentUser);
 
 console.log(reciever)
+
+// This Function retrieves 
+const changeUser = (item) =>{
+  setReciever(item._id)
+  setReciever_name(item.name)
+}
+
 
   // const pushRecent = (element) => {
   //     setReciever((state)=>[...state,element])
@@ -73,7 +80,7 @@ console.log(reciever)
                   recentUser.map((item) => {
                     
                     return (
-                              <li onClick={()=> setReciever(item._id)} 
+                              <li onClick={()=> changeUser(item)} 
                               key={item._id} className="py-3 sm:py-4">
                                 <div className="flex items-center space-x-4">
                                   <div className="flex-shrink-0 w-12 h-12 rounded-full">

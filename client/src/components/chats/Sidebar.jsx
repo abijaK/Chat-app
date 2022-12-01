@@ -4,7 +4,7 @@ import { AiFillMessage } from 'react-icons/ai'
 
 function Sidebar() {
   return (
-        <div className="w-[12%] flex flex-col items-center gap-20 max-w-md p-2 bg-blue-600 rounded-lg shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+        <div className="w-[12%] flex flex-col items-center gap-20 max-w-md p-2 bg-cyan-600 rounded-lg shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700">
           <div className="flex-shrink-0 w-12 h-12 ">
             <img
               className="rounded-full"

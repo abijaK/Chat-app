@@ -19,6 +19,6 @@ router.delete('/users/delete/:userID', deleteSingleUser);
 
 router.post('/discuss/chats/add/', addMessage);
 
-router.get('/discuss/chats/show/', showMessages);
+router.get('/discuss/chats/show/:id', showMessages);
 
 module.exports = router;

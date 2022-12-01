@@ -1,8 +1,15 @@
+const { default: mongoose } = require("mongoose");
 const Message = require("../models/message.models.js");
 
 // Retrieve all message sended
 const showMessages = async(req, res, next) => {
-    const msg = await Message.find();
+    console.log(req.params._id);
+    const msg = await Message.find({
+        $or: [
+                {sender: new mongoose.Types.ObjectId(req.params.id)},
+                {reciever: new mongoose.Types.ObjectId(req.params.id)}
+             ]
+    });
     try {
         if (msg) {
             res.json({ message: msg });

@@ -44,7 +44,6 @@ console.log(email,password);
        * {...}
        */
       
-      
       // Show Chatroom if user is logged in
       if(responses.data.status===true){
         setData(responses.data)
