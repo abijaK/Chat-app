@@ -77,21 +77,21 @@ const changeUser = (item) =>{
               { 
               
               recentUser &&
-                  recentUser.map((item) => {
+                  recentUser.map((user) => {
                     
                     return (
-                              <li onClick={()=> changeUser(item)} 
-                              key={item._id} className="py-3 sm:py-4">
+                              <li onClick={()=> changeUser(user)} 
+                              key={user._id} className="py-3 sm:py-4">
                                 <div className="flex items-center space-x-4">
                                   <div className="flex-shrink-0 w-12 h-12 rounded-full">
                                     {/* {item.picture} */}
                                   </div>
                                   <div className="flex-1 min-w-0">
                                     <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                      {item.name}
+                                      {user.name}
                                     </p>
                                     <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                                    {item.email}
+                                    {user.email}
                                     </p>
                                   </div>
                                 </div>
@@ -100,82 +100,6 @@ const changeUser = (item) =>{
                           })
               }
 
-                {/* <li className="py-3 sm:py-4">
-                  <div className="flex items-center space-x-4">
-                    <div className="flex-shrink-0 w-12 h-12 ">
-                      <img
-                        className="rounded-full"
-                        src="https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
-                        alt="use img"
-                      />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                        Bonnie Green
-                      </p>
-                      <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                        email@windster.com
-                      </p>
-                    </div>
-                  </div>
-                </li>
-                <li className="py-3 sm:py-4">
-                  <div className="flex items-center space-x-4">
-                    <div className="flex-shrink-0 w-12 h-12 ">
-                      <img
-                        className="rounded-full"
-                        src="https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
-                        alt="use img"
-                      />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                        Michael Gough
-                      </p>
-                      <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                        email@windster.com
-                      </p>
-                    </div>
-                  </div>
-                </li>
-                <li className="py-3 sm:py-4">
-                  <div className="flex items-center space-x-4">
-                    <div className="flex-shrink-0 w-12 h-12 ">
-                      <img
-                        className="rounded-full"
-                        src="https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
-                        alt="use img"
-                      />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                        Lana Byrd
-                      </p>
-                      <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                        email@windster.com
-                      </p>
-                    </div>
-                  </div>
-                </li>
-                <li className="pt-3 pb-0 sm:pt-4">
-                  <div className="flex items-center space-x-4">
-                    <div className="flex-shrink-0 w-12 h-12 ">
-                      <img
-                        className="rounded-full"
-                        src="https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
-                        alt="use img"
-                      />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                        Thomes Lean
-                      </p>
-                      <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                        email@windster.com
-                      </p>
-                    </div>
-                  </div>
-                </li> */}
               </ul>
 
             </div>

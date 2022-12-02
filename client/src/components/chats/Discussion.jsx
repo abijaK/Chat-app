@@ -2,27 +2,28 @@ import axios from 'axios';
 import React, { useEffect } from 'react'
 // const HOST_URL=process.env.BASE_URL;
 
-function Discussion({  contents, setContents, reciever, reciever_name, setReciever_name }) {
+function Discussion({  contents, setContents, reciever, reciever_name, setReciever_name, newMessage, setNewMessage }) {
 
     
     // Retrieves the currentID of the sender from localStorage
-    const currentID = JSON.parse(localStorage.getItem("user")).idSender;
-    console.log("Discussion", currentID);
+    const idSender = JSON.parse(localStorage.getItem("user")).idSender;
+    console.log("Sender ID", idSender);
     
     // Post sender._id with message's content to the reciever
     const submitHandler = (e) => {
         e.preventDefault();
         axios.post("http://localhost:9000/discuss/chats/add/",
             {
-                sender:currentID,
+                sender:idSender,
                 content:contents,
                 reciever:reciever
             }
-            )}
+        )}
     
+        console.log("Reciever ID", reciever);
+    // Show 
     useEffect(() => {
-        
-        axios.get(`http://localhost:9000/discuss/chats/show/${currentID}`)
+        axios.get(`http://localhost:9000/discuss/chats/show/${idSender}`)
         .then((response)=>{
                 setReciever_name(response.data.content)
         }).catch(error => {
@@ -34,15 +35,15 @@ function Discussion({  contents, setContents, reciever, reciever_name, setReciev
   return (
         <div className="w-full p-4 bg-white border rounded-lg shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700">
             <div className="flex flex-col justify-between divide-y divide-gray-200">
-                <div className="headerChatRoom flex ">
+                <div className="headerChatRoom flex justify-between gap-3 items-center">
                     <div className="flex-shrink-0 w-12 h-12 ">
-                    <img
-                        className="rounded-full"
-                        src="https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144"
-                        alt="use img"
-                    />
+                        <img
+                            className="rounded-full"
+                            src="https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144"
+                            alt="use img"
+                        />
                     </div>
-                    <div className="flex-1 min-w-0 text-center">
+                    <div className="flex-1 min-w-0  justify-center">
                         <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
                             {reciever_name}
                         </p>
@@ -54,23 +55,35 @@ function Discussion({  contents, setContents, reciever, reciever_name, setReciev
     
                 <div className="bodyChatRoom mt-3 h-[65vh]">
                     <div id="messages" className="flex flex-col space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
-                       
-                        <div className="chat-message">
-                            <div className="flex items-end">
-                                <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
-                                    <div><span className="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600">Can be verified on any platform using docker</span></div>
+                      
+                    {
+                        newMessage &&
+                            newMessage.map((message) => {
+                                return (
+                                <>
+                                    <div key={message.sender} className="chat-message">
+                                        <div className="flex items-end">
+                                            <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
+                                                <div><span className="px-4 py-2 rounded-lg inline-block rounded-bl-none 
+                                                    bg-gray-300 text-gray-600">{message.content}</span></div>
+                                            </div>
+                                                <img src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="My profile" className="w-6 h-6 rounded-full order-1" />
+                                        </div>
                                     </div>
-                                    <img src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="My profile" className="w-6 h-6 rounded-full order-1" />
-                            </div>
-                        </div>
-                        <div className="chat-message">
-                            <div className="flex items-end justify-end">
-                                <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
-                                    <div><span className="px-4 py-2 rounded-lg inline-block bg-blue-600 text-white ">Are you using sudo?</span></div>
+                                    <div key={message.reciever} className="chat-message">
+                                        <div className="flex items-end justify-end">
+                                            <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
+                                                <div><span className="px-4 py-2 rounded-lg inline-block 
+                                                    bg-blue-600 text-white ">{message.content}</span></div>
+                                            </div>
+                                                <img src="https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="My profile" className="w-6 h-6 rounded-full order-2" />
+                                        </div>
                                     </div>
-                                    <img src="https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="My profile" className="w-6 h-6 rounded-full order-2" />
-                            </div>
-                        </div>
+                                </>    
+                                        )
+                            })
+                    }
+                   
                     </div>
                 </div>
                 {/* <div className="bodyChatRoom mt-3 h-[65vh]">

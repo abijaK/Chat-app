@@ -12,11 +12,11 @@ function ChatRoom() {
   const [recentUser, setRecentUser] = useState("");
   const [showMoreRecent, setShowMoreRecent] = useState("");
   const [newMessage, setNewMessage] = useState("");
-  const [reciever_name, setReciever_name] = useState("Welcome to ChatNanga")
+  const [reciever_name, setReciever_name] = useState("Welcome to Chat")
 
   return (
-    <div className="bg-whitedress bg-cover bg-no-repeat h-full flex justify-center flex-col items-center">
-      <div className="wraper w-[100%] flex justify-center gap-4 container m-10 p-8 bg-opacity-40 bg-slate-300 rounded-xl">
+    <div className="bg-whitedress p-6 bg-cover bg-no-repeat h-full flex justify-center flex-col items-center">
+      <div className="wraper w-[100%] flex justify-center gap-4 p-4 bg-opacity-40 bg-slate-300 rounded-xl">
         <Sidebar />
           <Recentusers 
             reciever_name={reciever_name} setReciever_name={setReciever_name}
