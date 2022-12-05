@@ -11,9 +11,7 @@ There are 2 principal API :
 
 Note: rendering or adding user, a valid token is required.
 
-- Create an account using this endpoint
-
-https://chat-app-ebon-six.vercel.app/register
+Create an account using this endpoint : https://chat-app-ebon-six.vercel.app/register
 
 - Body request
 {
@@ -32,9 +30,7 @@ https://chat-app-ebon-six.vercel.app/register
 
 ## Message API
 
-- Send a new message using this endpoint
-
-https://chat-app-ebon-six.vercel.app/chats/add/
+Send a new message using this endpoint : https://chat-app-ebon-six.vercel.app/chats/add/
 
 - Body request
 {
@@ -43,7 +39,5 @@ https://chat-app-ebon-six.vercel.app/chats/add/
    "reciever": "idreciever"
 }
 
-- Render the message of a couple user using this endpoint
-
-https://chat-app-ebon-six.vercel.app/chats/show/${id}
+Render the message of a couple user using this endpoint : https://chat-app-ebon-six.vercel.app/chats/show/${id}
 id: refers to the user from whom you need to get mutual conversations
