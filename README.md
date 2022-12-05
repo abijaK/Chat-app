@@ -14,11 +14,13 @@ Note: rendering or adding user, a valid token is required.
 Create an account using this endpoint : https://chat-app-ebon-six.vercel.app/register
 
 - Body request
+```javascript
 {
    "name": "Samuel",
    "email":"samuel@gmail.com",
    "password": "gda123"
 }
+```
 
 - Response
 {
