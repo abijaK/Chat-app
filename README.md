@@ -2,12 +2,12 @@
 
 This is the Backend App composed of api made for a real time chat using express, mongo, jwt and socket.io
 
-# Access url
+## Access url
 https://chat-app-ebon-six.vercel.app/
 
 There are 2 principal API :
 
-1. User API
+## User API
 
 Note: rendering or adding user, a valid token is required.
 
@@ -30,7 +30,7 @@ https://chat-app-ebon-six.vercel.app/register
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODE0MmUyMDBlY2ZjZWNjYTdmNDk1MyIsImlhdCI6MTY3MDI0NTc2MiwiZXhwIjoxNjcwNDE4NTYyfQ.IAJR4OC-966HsfCArUFBQ5JpebAuTKFGB_SJq6mIbhM"
 }
 
-2. Message API
+## Message API
 
 - Send a new message using this endpoint
 
