@@ -14,12 +14,12 @@ useEffect(() => {
 }, []);
 //  console.log(recentUser);
 
-console.log(reciever)
+// console.log(reciever)
 
 // This Function retrieves 
-const changeUser = (item) =>{
-  setReciever(item._id)
-  setReciever_name(item.name)
+const changeUser = (user) =>{
+  setReciever(user._id)
+  setReciever_name(user.name)
 }
 
 

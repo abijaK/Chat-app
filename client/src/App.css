@@ -5,3 +5,7 @@
 .chatroom, .wraper{
     height: 100vh;
 }
+
+.bodyChatRoom{
+    max-height: 60%;
+}

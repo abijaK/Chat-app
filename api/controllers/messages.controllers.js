@@ -3,7 +3,7 @@ const Message = require("../models/message.models.js");
 
 // Retrieve all message sended and selected by id 
 const showMessages = async(req, res, next) => {
-    console.log(req.params._id);
+    // console.log(req.params._id);
     const msg = await Message.find({
         $or: [
                 {sender: new mongoose.Types.ObjectId(req.params.id)},

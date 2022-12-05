@@ -2,12 +2,10 @@ import axios from 'axios';
 import React, { useEffect } from 'react'
 // const HOST_URL=process.env.BASE_URL;
 
-function Discussion({  contents, setContents, reciever, reciever_name, setReciever_name, newMessage, setNewMessage }) {
+function Discussion({  contents, setContents, reciever, reciever_name, newMessage, setNewMessage }) {
 
-    
-    // Retrieves the currentID of the sender from localStorage
+    // Retrieves from localStorage the id of the current user
     const idSender = JSON.parse(localStorage.getItem("user")).idSender;
-    console.log("Sender ID", idSender);
     
     // Post sender._id with message's content to the reciever
     const submitHandler = (e) => {
@@ -20,18 +18,42 @@ function Discussion({  contents, setContents, reciever, reciever_name, setReciev
             }
         )}
     
-        console.log("Reciever ID", reciever);
-    // Show 
+    // Show messages in chatroom
     useEffect(() => {
         axios.get(`http://localhost:9000/discuss/chats/show/${idSender}`)
         .then((response)=>{
-                setReciever_name(response.data.content)
+            setNewMessage(response.data.message)
+            
         }).catch(error => {
             console.log(error);
         }) 
     }, []);
+    console.log(newMessage[0]);
+    
+    let messageTab = [];
+    let bothChat =[];
 
-    console.log(reciever_name);
+    // Filter of messages
+    const messageFiltered = newMessage?.filter((item)=>{
+        
+        messageTab.push(item.sender, item.reciever);
+        bothChat = [...new Set(messageTab)];
+        console.log(bothChat);
+
+        if (newMessage.sender === reciever || newMessage.reciever === reciever) {
+            return true;
+        }else return false;
+    });
+    console.log(messageFiltered);
+    
+    // Filter of users
+    
+    
+    // console.log("message:", newMessage);
+
+        // console.log("Sender ID", idSender);
+    // console.log("Reciever ID", reciever);
+    // console.log("Props:", reciever_name);
   return (
         <div className="w-full p-4 bg-white border rounded-lg shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700">
             <div className="flex flex-col justify-between divide-y divide-gray-200">
@@ -48,29 +70,29 @@ function Discussion({  contents, setContents, reciever, reciever_name, setReciev
                             {reciever_name}
                         </p>
                         <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                            Online
+                            {/* Online */}
                         </p>
                     </div>
                 </div>
     
                 <div className="bodyChatRoom mt-3 h-[65vh]">
-                    <div id="messages" className="flex flex-col space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
-                      
-                    {
+                    <div id="messages" className="flex flex-col scroll-my-2 space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
+                     
+                     {
                         newMessage &&
-                            newMessage.map((message) => {
+                        newMessage.map((message, i) => {
                                 return (
-                                <>
-                                    <div key={message.sender} className="chat-message">
+                                <> 
+                                    <div key={message[i]} className="chat-message">
                                         <div className="flex items-end">
                                             <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
                                                 <div><span className="px-4 py-2 rounded-lg inline-block rounded-bl-none 
                                                     bg-gray-300 text-gray-600">{message.content}</span></div>
                                             </div>
-                                                <img src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="My profile" className="w-6 h-6 rounded-full order-1" />
+                                                  <img src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="My profile" className="w-6 h-6 rounded-full order-1" />
                                         </div>
                                     </div>
-                                    <div key={message.reciever} className="chat-message">
+                                    <div key={message[i]} className="chat-message">
                                         <div className="flex items-end justify-end">
                                             <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
                                                 <div><span className="px-4 py-2 rounded-lg inline-block 
@@ -79,11 +101,11 @@ function Discussion({  contents, setContents, reciever, reciever_name, setReciev
                                                 <img src="https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="My profile" className="w-6 h-6 rounded-full order-2" />
                                         </div>
                                     </div>
-                                </>    
-                                        )
+                                </>)
                             })
-                    }
-                   
+                    
+                        }
+                        
                     </div>
                 </div>
                 {/* <div className="bodyChatRoom mt-3 h-[65vh]">

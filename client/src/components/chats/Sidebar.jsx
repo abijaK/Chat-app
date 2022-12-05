@@ -13,12 +13,12 @@ function Sidebar() {
             />
           </div>
 
-          <div className="bg-white bg-opacity-30 flex justify-between gap-4 ml-14 rounded-tl-lg rounded-bl-lg">
+          {/* <div className="bg-white bg-opacity-30 flex justify-between gap-4 ml-14 rounded-tl-lg rounded-bl-lg">
             <div className="p-2">
               <AiFillMessage className="text-white w-8 h-8 ml-5" />
             </div>
             <div className="bg-yellow-200 w-2 justify-end"></div>
-          </div>
+          </div> */}
         </div>
   )
 }
