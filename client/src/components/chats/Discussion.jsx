@@ -1,8 +1,10 @@
 import axios from 'axios';
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 // const HOST_URL=process.env.BASE_URL;
 
 function Discussion({  contents, setContents, reciever, reciever_name, newMessage, setNewMessage }) {
+
+    const [messageFilter, setMessageFilter] = useState([])
 
     // Retrieves from localStorage the id of the current user
     const idSender = JSON.parse(localStorage.getItem("user")).idSender;
@@ -18,7 +20,7 @@ function Discussion({  contents, setContents, reciever, reciever_name, newMessag
             }
         )}
     
-    // Show messages in chatroom
+    // Show messages in chatroom 
     useEffect(() => {
         axios.get(`http://localhost:9000/discuss/chats/show/${idSender}`)
         .then((response)=>{
@@ -28,23 +30,35 @@ function Discussion({  contents, setContents, reciever, reciever_name, newMessag
             console.log(error);
         }) 
     }, []);
-    console.log(newMessage[0]);
+    console.log(newMessage.reciever);
     
-    let messageTab = [];
-    let bothChat =[];
+        useEffect(() => {
+            // let messageTab = [];
+            let bothChat =[];
 
-    // Filter of messages
-    const messageFiltered = newMessage?.filter((item)=>{
-        
-        messageTab.push(item.sender, item.reciever);
-        bothChat = [...new Set(messageTab)];
-        console.log(bothChat);
+            const ids =  newMessage.map(item => item._id)
 
-        if (newMessage.sender === reciever || newMessage.reciever === reciever) {
-            return true;
-        }else return false;
-    });
-    console.log(messageFiltered);
+            // Filter of messages
+            newMessage?.map((item)=>{
+                
+                
+                // messageTab.push(item.sender, item.reciever);
+                // bothChat = [...new Set(messageTab)];
+                // console.log(bothChat);
+
+                // if (newMessage.sender === reciever || newMessage.reciever === reciever) {
+                //     return true;
+                // }else return false;
+            });
+            bothChat = [...new Set(newMessage)]
+            setMessageFilter(bothChat)
+            console.log(messageFilter);
+            return () => {
+                
+            };
+        }, [newMessage]);
+
+    
     
     // Filter of users
     
@@ -83,24 +97,27 @@ function Discussion({  contents, setContents, reciever, reciever_name, newMessag
                         newMessage.map((message, i) => {
                                 return (
                                 <> 
-                                    <div key={message[i]} className="chat-message">
-                                        <div className="flex items-end">
-                                            <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
-                                                <div><span className="px-4 py-2 rounded-lg inline-block rounded-bl-none 
-                                                    bg-gray-300 text-gray-600">{message.content}</span></div>
+                                    {message.sender.toString() !== idSender.toString() ? (
+                                        <div key={message[i]} className="chat-message">
+                                            <div className="flex items-end">
+                                                <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
+                                                    <div><span className="px-4 py-2 rounded-lg inline-block rounded-bl-none 
+                                                        bg-gray-300 text-gray-600">{message.content}</span></div>
+                                                </div>
+                                                    <img src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="My profile" className="w-6 h-6 rounded-full order-1" />
                                             </div>
-                                                  <img src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="My profile" className="w-6 h-6 rounded-full order-1" />
                                         </div>
-                                    </div>
-                                    <div key={message[i]} className="chat-message">
-                                        <div className="flex items-end justify-end">
-                                            <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
-                                                <div><span className="px-4 py-2 rounded-lg inline-block 
-                                                    bg-blue-600 text-white ">{message.content}</span></div>
+                                    ) : (
+                                        <div key={message[i]} className="chat-message">
+                                            <div className="flex items-end justify-end">
+                                                <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
+                                                    <div><span className="px-4 py-2 rounded-lg inline-block 
+                                                        bg-blue-600 text-white ">{message.content}</span></div>
+                                                </div>
+                                                    <img src="https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="My profile" className="w-6 h-6 rounded-full order-2" />
                                             </div>
-                                                <img src="https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="My profile" className="w-6 h-6 rounded-full order-2" />
                                         </div>
-                                    </div>
+                                    )}                                     
                                 </>)
                             })
                     

@@ -12,7 +12,8 @@ function ChatRoom() {
   const [recentUser, setRecentUser] = useState("");
   const [showMoreRecent, setShowMoreRecent] = useState("");
   const [newMessage, setNewMessage] = useState([]);
-  const [reciever_name, setReciever_name] = useState("Welcome to Chat")
+  const [reciever_name, setReciever_name] = useState("Welcome to Chat");
+  
 
   return (
     <div className="bg-whitedress p-6 bg-cover bg-no-repeat h-full flex justify-center flex-col items-center">
