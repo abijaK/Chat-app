@@ -8,8 +8,9 @@ const showMessages = async(req, res, next) => {
         $or: [
                 {sender: new mongoose.Types.ObjectId(req.params.id)},
                 {reciever: new mongoose.Types.ObjectId(req.params.id)}
-             ]
+            ]
     });
+    console.log(req.params);
     try {
         if (msg) {
             res.json({ message: msg });

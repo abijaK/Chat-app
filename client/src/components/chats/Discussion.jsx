@@ -1,10 +1,8 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 // const HOST_URL=process.env.BASE_URL;
 
 function Discussion({  contents, setContents, reciever, reciever_name, newMessage, setNewMessage }) {
-
-    const [messageFilter, setMessageFilter] = useState([])
 
     // Retrieves from localStorage the id of the current user
     const idSender = JSON.parse(localStorage.getItem("user")).idSender;
@@ -19,8 +17,8 @@ function Discussion({  contents, setContents, reciever, reciever_name, newMessag
                 reciever:reciever
             }
         )}
-    
-    // Show messages in chatroom 
+
+    // Show messages by idsender in chatroom
     useEffect(() => {
         axios.get(`http://localhost:9000/discuss/chats/show/${idSender}`)
         .then((response)=>{
@@ -30,44 +28,16 @@ function Discussion({  contents, setContents, reciever, reciever_name, newMessag
             console.log(error);
         }) 
     }, []);
-    console.log(newMessage.reciever);
-    
-        useEffect(() => {
-            // let messageTab = [];
-            let bothChat =[];
+    console.log(newMessage);
 
-            const ids =  newMessage.map(item => item._id)
+    const messageFilter =newMessage.filter((message)=>{
+        if (message.reciever===reciever || message.sender===reciever) {
+            return true
+        }
+        else return false
+    })
+    console.log("my message :",messageFilter);
 
-            // Filter of messages
-            newMessage?.map((item)=>{
-                
-                
-                // messageTab.push(item.sender, item.reciever);
-                // bothChat = [...new Set(messageTab)];
-                // console.log(bothChat);
-
-                // if (newMessage.sender === reciever || newMessage.reciever === reciever) {
-                //     return true;
-                // }else return false;
-            });
-            bothChat = [...new Set(newMessage)]
-            setMessageFilter(bothChat)
-            console.log(messageFilter);
-            return () => {
-                
-            };
-        }, [newMessage]);
-
-    
-    
-    // Filter of users
-    
-    
-    // console.log("message:", newMessage);
-
-        // console.log("Sender ID", idSender);
-    // console.log("Reciever ID", reciever);
-    // console.log("Props:", reciever_name);
   return (
         <div className="w-full p-4 bg-white border rounded-lg shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700">
             <div className="flex flex-col justify-between divide-y divide-gray-200">
@@ -90,25 +60,27 @@ function Discussion({  contents, setContents, reciever, reciever_name, newMessag
                 </div>
     
                 <div className="bodyChatRoom mt-3 h-[65vh]">
-                    <div id="messages" className="flex flex-col scroll-my-2 space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
+                    <div id="messages" className="flex flex-col scroll-my-2 space-y-4 p-3 h-[90%] overflow-y-scroll scrollbar scrollbar-w-2 scrolling-touch">
                      
                      {
-                        newMessage &&
-                        newMessage.map((message, i) => {
-                                return (
-                                <> 
-                                    {message.sender.toString() !== idSender.toString() ? (
-                                        <div key={message[i]} className="chat-message">
-                                            <div className="flex items-end">
-                                                <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
-                                                    <div><span className="px-4 py-2 rounded-lg inline-block rounded-bl-none 
-                                                        bg-gray-300 text-gray-600">{message.content}</span></div>
-                                                </div>
-                                                    <img src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="My profile" className="w-6 h-6 rounded-full order-1" />
-                                            </div>
+                        messageFilter &&
+                        messageFilter.map((message,i) => {
+                            if (message.sender===idSender) {
+                                return(
+                                    <div key={i} className="chat-message">
+                                    <div className="flex items-end">
+                                        <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
+                                            <div><span className="px-4 py-2 rounded-lg inline-block rounded-bl-none 
+                                                bg-gray-300 text-gray-600">{message.content}</span></div>
                                         </div>
-                                    ) : (
-                                        <div key={message[i]} className="chat-message">
+                                            <img src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="My profile" className="w-6 h-6 rounded-full order-1" />
+                                    </div>
+                                </div>
+                                )
+                                
+                            }else
+                                return (
+                                        <div key={i} className="chat-message">
                                             <div className="flex items-end justify-end">
                                                 <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end">
                                                     <div><span className="px-4 py-2 rounded-lg inline-block 
@@ -116,29 +88,15 @@ function Discussion({  contents, setContents, reciever, reciever_name, newMessag
                                                 </div>
                                                     <img src="https://images.unsplash.com/photo-1590031905470-a1a1feacbb0b?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144" alt="My profile" className="w-6 h-6 rounded-full order-2" />
                                             </div>
-                                        </div>
-                                    )}                                     
-                                </>)
+                                        </div>                                
+                            )
                             })
                     
                         }
                         
                     </div>
                 </div>
-                {/* <div className="bodyChatRoom mt-3 h-[65vh]">
-                    <div className="flex-shrink-0 w-12 ">
-                        <div className='flex'>
-                            <div className=''></div>
-                            <div className='fluid'><h3>Hello world</h3></div>
-                        </div>
-                        <img
-                            className="rounded-full mt-3"
-                            src="https://images.unsplash.com/photo-1549078642-b2ba4bda0cdb?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=144&amp;h=144"
-                            alt="use img"
-                        />
-                        </div>
-                </div> */}
-    
+
                 <div className="footerChatRoom">
                     <div className="border-t-1 border-gray-200 px-4 pt-4 mb-2 sm:mb-0">
                         <div className="relative flex">
@@ -146,7 +104,7 @@ function Discussion({  contents, setContents, reciever, reciever_name, newMessag
                             <span className="absolute inset-y-0 flex items-center">
                             <button
                                 type="button"
-                                className="inline-flex items-center justify-center rounded-full h-12 w-12 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
+                                className="inline-flex items-center justify-center rounded-full h-12 w-12 transition duration-500 ease-in-out text-gray-500 hover:bg-cyan-brightened focus:outline-none"
                                 >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -166,19 +124,19 @@ function Discussion({  contents, setContents, reciever, reciever_name, newMessag
                             </span>
     
                         {/* Message input */}
-                            <form className='w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 pl-12 bg-gray-200 rounded-md'>
+                            <form className='w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 pl-12 bg-cyan-brightened rounded-md'>
                                 <input
                                 type="text"
                                 placeholder="Write your message!"
                                 onChange={(e) => setContents(e.target.value)}
-                                className="w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 bg-gray-200 rounded-md py-3"
+                                className="w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 bg-cyan-lightened rounded-md py-3"
                                 />
                             </form>
     
                             <div className="absolute right-0 items-center inset-y-0 hidden sm:flex">
                                 <button
                                     type="button"
-                                    className="inline-flex items-center justify-center rounded-full h-10 w-10 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
+                                    className="inline-flex items-center justify-center rounded-full h-10 w-10 transition duration-500 ease-in-out text-gray-500 hover:bg-cyan-brightened focus:outline-none"
                                 >
                                     <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -221,7 +179,7 @@ function Discussion({  contents, setContents, reciever, reciever_name, newMessag
                     </div>
                 </div>
             </div>
-    </div>
+        </div>
   )
 }
 

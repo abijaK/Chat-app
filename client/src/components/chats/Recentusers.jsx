@@ -1,33 +1,35 @@
 import axios from 'axios'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 function Recentusers({ reciever, setReciever, recentUser, setRecentUser, reciever_name, setReciever_name }) {
 
+  const [isClicked, setIsClicked] = useState(false) 
   
-useEffect(() => {
-  axios.get("http://localhost:9000/users")
-  .then((response)=> {
-    setRecentUser(response.data.user)
-    // console.log(response.data.user);
-  }).catch((error) => console.error(error))
-  
-}, []);
-//  console.log(recentUser);
+  useEffect(() => {
+    axios.get("http://localhost:9000/users")
+    .then((response)=> {
+      setRecentUser(response.data.user)
+      // console.log(response.data.user);
+    }).catch((error) => console.error(error))
+    
+  }, []);
 
-// console.log(reciever)
+  console.log(recentUser);
 
-// This Function retrieves 
-const changeUser = (user) =>{
-  setReciever(user._id)
-  setReciever_name(user.name)
-}
+  // This Function retrieves the receiver
+  const changeUser = (user) =>{
+    setReciever(user._id)
+    setReciever_name(user.name)
+  }
 
+  console.log(reciever);
 
   // const pushRecent = (element) => {
   //     setReciever((state)=>[...state,element])
   // }
   return (
     <div className="recent-side flex flex-col gap-3 justify-start">
+      {/* Input Search */}
           <form className="flex items-center">
             <label htmlFor="simple-search" className="sr-only">
               Search
@@ -59,20 +61,14 @@ const changeUser = (user) =>{
           </form>
 
           {/* Recent users */}
-          <div className="w-full bg-white border rounded-lg shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700">
-            <div className="flex items-center justify-between">
+          <div className=" h-[91.5%] bg-white border rounded-lg shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+            <div className="flex items-center justify-between mb-5">
               <h5 className="text-md font-medium leading-none text-gray-700 dark:text-white">
                 Recent
               </h5>
-              <a
-                href="/"
-                className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500"
-              >
-                View all
-              </a>
             </div>
 
-            <div className="flow-root">
+            <div className="flow-root h-[90%] overflow-y-scroll scrollbar mb-5">
               <ul className="divide-y divide-gray-200 dark:divide-gray-700">
               { 
               
@@ -80,8 +76,9 @@ const changeUser = (user) =>{
                   recentUser.map((user) => {
                     
                     return (
+
                               <li onClick={()=> changeUser(user)} 
-                              key={user._id} className="py-3 sm:py-4">
+                              key={user._id} className="py-3 sm:py-4 mx-2">
                                 <div className="flex items-center space-x-4">
                                   <div className="flex-shrink-0 w-12 h-12 rounded-full">
                                     {/* {item.picture} */}

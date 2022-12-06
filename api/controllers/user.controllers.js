@@ -41,10 +41,16 @@ const registerUser = asyncHandler(async (req, res) => {
     }
 });
 
+// Get all users
 const getAllUsers = async (req, res, next) => {
 
     try {
-        const user = await User.find();
+        const user = await User.find({
+                $not: [
+                    {sender : req.params.id}
+                ]
+            });
+
         if (!user) {
             return res.json({
                 msg: "Error: None user found",
@@ -52,7 +58,7 @@ const getAllUsers = async (req, res, next) => {
             })
         }else{
            
-        console.log("Users are availables");
+        console.log("Users found!");
         
         return res.status(200).json({ user });
         }
