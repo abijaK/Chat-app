@@ -2,9 +2,6 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
 function Recentusers({ reciever, setReciever, recentUser, setRecentUser, reciever_name, setReciever_name }) {
-
-  const [isClicked, setIsClicked] = useState(false) 
-  
   useEffect(() => {
     axios.get("http://localhost:9000/users")
     .then((response)=> {
@@ -78,7 +75,7 @@ function Recentusers({ reciever, setReciever, recentUser, setRecentUser, recieve
                     return (
 
                               <li onClick={()=> changeUser(user)} 
-                              key={user._id} className="py-3 sm:py-4 mx-2">
+                              key={user._id} className="py-3 sm:py-4 mx-2 cursor-pointer">
                                 <div className="flex items-center space-x-4">
                                   <div className="flex-shrink-0 w-12 h-12 rounded-full">
                                     {/* {item.picture} */}

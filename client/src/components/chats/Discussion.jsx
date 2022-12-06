@@ -36,7 +36,7 @@ function Discussion({  contents, setContents, reciever, reciever_name, newMessag
         }
         else return false
     })
-    console.log("my message :",messageFilter);
+    console.log("my message :", messageFilter);
 
   return (
         <div className="w-full p-4 bg-white border rounded-lg shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700">

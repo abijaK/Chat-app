@@ -1,17 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import { AiFillMessage } from 'react-icons/ai'
-
+import { GiExitDoor } from 'react-icons/gi'
+import { useNavigate } from 'react-router-dom';
 
 function Sidebar() {
   
   const [currentUser, setCurrentUser] = useState();
+  const navigate = useNavigate("");
   
   useEffect(() => {
     setCurrentUser(JSON.parse(localStorage.getItem('user')).name);
   }, []);
+
+  const handleOnExit = () => {
+    localStorage.clear();
+    navigate("/");
+  }
   
   return (
-        <div className="w-[12%] flex flex-col items-center gap-20 max-w-md p-2 bg-cyan-600 rounded-lg shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+        <div className="w-[12%] flex flex-col items-center justify-between max-w-md p-2 bg-cyan-600 rounded-lg shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700">
           <div className="relative flex flex-col justify-center">
             <div className="right-0 top-2 absolute w-[10px] z-1 h-[10px] rounded-full bg-green-500"></div>
             <img
@@ -23,6 +30,9 @@ function Sidebar() {
                 <p className='text-md text-cyan-50'>{currentUser}</p>
               </div>
           </div>
+          <button onClick={handleOnExit}>
+            <GiExitDoor className='bottom-0 text-white w-9 h-9'/>
+          </button>
           {/* <div className="bg-white bg-opacity-30 flex justify-between gap-4 ml-14 rounded-tl-lg rounded-bl-lg">
             <div className="p-2">
               <AiFillMessage className="text-white w-8 h-8 ml-5" />

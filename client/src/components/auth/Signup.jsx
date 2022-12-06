@@ -14,20 +14,6 @@ function Signup() {
   const [password, setPassword] = useState();
   const [confirmpassword, setConfirmpassword] = useState();
   const [image, setImage] = useState();
-
-  const handleImage = (e) => {
-    const file = e.target.files[0];
-    setFileToBase(file);
-    console.log(file);
-  }
-
-  const setFileToBase = (file) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () =>{
-      setImage(reader.result)
-    }
-  }
   
   const navigate = useNavigate("");
 
@@ -68,6 +54,20 @@ function Signup() {
   }  
     
   }
+
+    const handleImage = (e) => {
+      const file = e.target.files[0];
+      setFileToBase(file);
+      console.log(file);
+    }
+
+    const setFileToBase = (file) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = () =>{
+        setImage(reader.result)
+      }
+    }
 
   return (
     <div className="bg-img bg-cover h-[100vh] mx-auto
