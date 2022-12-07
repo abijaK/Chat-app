@@ -14,6 +14,8 @@ module.exports = {
         'imperial-blue':'#639391',
         'turquoise': '#007864',
         'mansel-blue':'#6abec6',
+        'cyan-lightened': '#9ac9c91a',
+        'cyan-brightened': '#9ac9c948'
       },
     },
   },

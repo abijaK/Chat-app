@@ -31,21 +31,9 @@ console.log(email,password);
       }
       
     ).then((responses)=>{
-
-      /**
-       * const response = {
-       *  statusText:"OK",
-       *  status:200,
-       *  body:""
-       * }
-       * 
-       * //Then use them essentialy
-       * if(response[status])
-       * {...}
-       */
-      
-      // Show Chatroom if user is logged in
-      if(responses.data.status===true){
+     
+      // Show Chatroom if user connected
+      if(responses.data.status === true){
         setData(responses.data)
 
         // Notifies with success
@@ -67,7 +55,7 @@ console.log(email,password);
         navigate("/")
       }  
       
-      // Stores user informations when he's logged in
+      // Stores user informations when he's connected
       const localData =
         {
           idSender:responses.data._id,
@@ -78,8 +66,6 @@ console.log(email,password);
       console.log(localData);
 
       localStorage.setItem("user", JSON.stringify(localData))  
-
-      // console.log(responses.data);
       
     }).catch((err)=>{
       console.log(err);
