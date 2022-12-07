@@ -61,7 +61,7 @@ function Recentusers({ reciever, setReciever, recentUser, setRecentUser, recieve
           <div className=" h-[91.5%] bg-white border rounded-lg shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700">
             <div className="flex items-center justify-between mb-5">
               <h5 className="text-md font-medium leading-none text-gray-700 dark:text-white">
-                Recent
+                Contacts
               </h5>
             </div>
 

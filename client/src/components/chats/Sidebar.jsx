@@ -32,6 +32,7 @@ function Sidebar() {
           </div>
           <button onClick={handleOnExit}>
             <GiExitDoor className='bottom-0 text-white w-9 h-9'/>
+            {/* <span className='hover:cursor-pointer font-semibold text-cyan-100 '>Exit</span> */}
           </button>
           {/* <div className="bg-white bg-opacity-30 flex justify-between gap-4 ml-14 rounded-tl-lg rounded-bl-lg">
             <div className="p-2">
