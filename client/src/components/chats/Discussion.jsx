@@ -10,7 +10,7 @@ function Discussion({  contents, setContents, reciever, reciever_name, newMessag
     // Post sender._id with message's content to the reciever
     const submitHandler = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:9000/discuss/chats/add/",
+        axios.post("https://gda-chat-app.onrender.com/discuss/chats/add/",
             {
                 sender:idSender,
                 content:contents,
@@ -20,7 +20,7 @@ function Discussion({  contents, setContents, reciever, reciever_name, newMessag
 
     // Show messages by idsender in chatroom
     useEffect(() => {
-        axios.get(`http://localhost:9000/discuss/chats/show/${idSender}`)
+        axios.get(`https://gda-chat-app.onrender.com/discuss/chats/show/${idSender}`)
         .then((response)=>{
             setNewMessage(response.data.message)
             
