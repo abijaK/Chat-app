@@ -24,7 +24,7 @@ console.log(email,password);
   // Check if user credentials is the same in database
   const submitHandler = (e) => {
     e.preventDefault();
-   axios.post(`http://localhost:9000/auth/login`,
+   axios.post(`https://gda-chat-app.onrender.com/auth/login`,
       {
         email,
         password

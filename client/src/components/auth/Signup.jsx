@@ -25,7 +25,7 @@ function Signup() {
 
   // Send registration to the backend
   const submitHandler = () => {
-    axios.post("http://localhost:9000/auth/user",
+    axios.post("https://gda-chat-app.onrender.com/auth/user",
       {
         name,
         email,

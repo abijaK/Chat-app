@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 
 function Recentusers({ reciever, setReciever, recentUser, setRecentUser, reciever_name, setReciever_name }) {
   useEffect(() => {
-    axios.get("http://localhost:9000/users")
+    axios.get("https://gda-chat-app.onrender.com/users")
     .then((response)=> {
       setRecentUser(response.data.user)
       // console.log(response.data.user);
@@ -74,8 +74,7 @@ function Recentusers({ reciever, setReciever, recentUser, setRecentUser, recieve
                     
                     return (
 
-                              <li onClick={()=> changeUser(user)} 
-                              key={user._id} className="py-3 sm:py-4 mx-2 cursor-pointer">
+                              <li onClick={()=> changeUser(user)} key={user._id} className="py-3 sm:py-4 mx-2 cursor-pointer">
                                 <div className="flex items-center space-x-4">
                                   <div className="flex-shrink-0 w-12 h-12 rounded-full">
                                     {/* {item.picture} */}
