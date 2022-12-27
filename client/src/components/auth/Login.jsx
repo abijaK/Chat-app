@@ -7,7 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { FaRegEnvelope, FaEye, FaEyeSlash} from 'react-icons/fa';
 // const HOST_URL=process.env.BASE_URL;
 
-function Login() {
+export function Login() {
 
 const navigate = useNavigate()
   const [show, setShow] = useState(false)
@@ -146,5 +146,3 @@ console.log(email,password);
   ) 
     
 }
-
-export default Login

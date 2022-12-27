@@ -5,7 +5,7 @@ import { MdOutlineDriveFileRenameOutline, MdLockOutline } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 
-function Signup() {
+export function Signup() {
 
   const [showPass, setShowPass] = useState(false)
   const [showConfirmPass, setShowConfirmPass] = useState(false)
@@ -165,5 +165,3 @@ function Signup() {
     </div>
   )
 }
-
-export default Signup

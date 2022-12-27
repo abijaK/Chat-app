@@ -3,9 +3,9 @@ import { useState } from "react"
 import { Route, Routes } from "react-router-dom";
 import Login from './components/auth/Login';
 import Signup from './components/auth/Signup';
-import ChatRoom from './components/chats/ChatRoom';
+import { ChatRoom } from './components/chats/ChatRoom';
 
-function App() {
+export function App() {
 
   return (
     <div className="App">
@@ -18,4 +18,4 @@ function App() {
   );
 }
 
-export default App;
+// export default App;

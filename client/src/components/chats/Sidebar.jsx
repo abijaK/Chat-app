@@ -3,7 +3,7 @@ import { AiFillMessage } from 'react-icons/ai'
 import { GiExitDoor } from 'react-icons/gi'
 import { useNavigate } from 'react-router-dom';
 
-function Sidebar() {
+export function Sidebar() {
   
   const [currentUser, setCurrentUser] = useState();
   const navigate = useNavigate("");
@@ -43,5 +43,3 @@ function Sidebar() {
         </div>
   )
 }
-
-export default Sidebar

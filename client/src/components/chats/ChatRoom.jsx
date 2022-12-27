@@ -4,7 +4,7 @@ import Recentusers from "./Recentusers";
 import Discussion from "./Discussion";
 
 
-function ChatRoom() {
+export function ChatRoom() {
 
   const [sender, setSender] = useState("");
   const [contents, setContents] = useState("");
@@ -37,5 +37,3 @@ function ChatRoom() {
     </div>
   );
 }
-
-export default ChatRoom;
