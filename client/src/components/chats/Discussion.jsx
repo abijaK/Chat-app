@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect } from 'react'
 // const HOST_URL=process.env.BASE_URL;
 
-function Discussion({  contents, setContents, reciever, reciever_name, newMessage, setNewMessage }) {
+export function Discussion({  contents, setContents, reciever, reciever_name, newMessage, setNewMessage }) {
 
     // Retrieves from localStorage the id of the current user
     const idSender = JSON.parse(localStorage.getItem("user")).idSender;
@@ -182,5 +182,3 @@ function Discussion({  contents, setContents, reciever, reciever_name, newMessag
         </div>
   )
 }
-
-export default Discussion

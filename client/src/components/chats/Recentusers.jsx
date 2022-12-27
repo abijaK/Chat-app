@@ -1,7 +1,7 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
-function Recentusers({ reciever, setReciever, recentUser, setRecentUser, reciever_name, setReciever_name }) {
+export function Recentusers({ reciever, setReciever, recentUser, setRecentUser, reciever_name, setReciever_name }) {
   useEffect(() => {
     axios.get("https://gda-chat-app.onrender.com/users")
     .then((response)=> {
@@ -31,6 +31,7 @@ function Recentusers({ reciever, setReciever, recentUser, setRecentUser, recieve
             <label htmlFor="simple-search" className="sr-only">
               Search
             </label>
+            
             <div className="relative w-full max-w-md ">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <svg
@@ -100,5 +101,3 @@ function Recentusers({ reciever, setReciever, recentUser, setRecentUser, recieve
         </div>
   )
 }
-
-export default Recentusers
