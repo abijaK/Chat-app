@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect } from 'react'
 
 export function Recentusers({ reciever, setReciever, recentUser, setRecentUser, reciever_name, setReciever_name }) {
+  
   useEffect(() => {
     axios.get("https://gda-chat-app.onrender.com/users")
     .then((response)=> {

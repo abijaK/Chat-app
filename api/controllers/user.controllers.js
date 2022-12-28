@@ -112,7 +112,7 @@ const deleteSingleUser = async(req, res, next) => {
     }
 }
 
-module.exports = { 
+export{ 
     registerUser , 
     getAllUsers, 
     getUsersProfile,

@@ -15,4 +15,4 @@ const dbConnexion = async() => {
     }
 };
 
-module.exports = dbConnexion;
+export { dbConnexion };

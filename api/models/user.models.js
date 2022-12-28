@@ -36,4 +36,4 @@ mongoose.plugin(mongooseUniqueValid);
 
 const User = mongoose.model('User', userModel);
 
-module.exports = User;
+export { User };

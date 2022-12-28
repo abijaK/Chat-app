@@ -27,4 +27,4 @@ const addMessage =async(req, res) => {
     res.json({ message: newMessage });
 }
 
-module.exports = {showMessages, addMessage}
+export {showMessages, addMessage}

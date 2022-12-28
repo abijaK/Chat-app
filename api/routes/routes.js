@@ -21,4 +21,4 @@ router.post('/discuss/chats/add/', addMessage);
 
 router.get('/discuss/chats/show/:id', showMessages);
 
-module.exports = router;
+export { router };

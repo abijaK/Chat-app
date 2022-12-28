@@ -1,5 +1,4 @@
 import './App.css';
-import { useState } from "react"
 import { Route, Routes } from "react-router-dom";
 import Login from './components/auth/Login';
 import Signup from './components/auth/Signup';
@@ -17,5 +16,3 @@ export function App() {
     </div>
   );
 }
-
-// export default App;
