@@ -1,7 +1,7 @@
 import './App.css';
 import { Route, Routes } from "react-router-dom";
-import Login from './components/auth/Login';
-import Signup from './components/auth/Signup';
+import { Login } from './components/auth/Login';
+import { Signup } from './components/auth/Signup';
 import { ChatRoom } from './components/chats/ChatRoom';
 
 export function App() {

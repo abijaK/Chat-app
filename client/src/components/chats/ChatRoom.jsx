@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Sidebar from "./Sidebar";
-import Recentusers from "./Recentusers";
-import Discussion from "./Discussion";
+import { Sidebar } from "./Sidebar";
+import { Recentusers } from "./Recentusers";
+import { Discussion } from "./Discussion";
 
 
 export function ChatRoom() {
