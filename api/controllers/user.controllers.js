@@ -1,45 +1,5 @@
 import { User } from '../models/user.models.js';
-import { generateToken } from '../config/generateToken.js';
 
-// Registration
-const registerUser = async(req, res) => {
-    
-    const { username, email, password, picture } = req.body;
-   
-        if (!username || !email || !password) {
-            console.log(req.body);
-            return res.status(400).send({ message: "Please complete all the Fields" });
-            // throw new Error("Please complete all the Fields");
-        }
-    
-        // Search for email to know if user exists
-        const userExists = await User.findOne({ email });
-        
-        if (userExists) {
-            res.status(400).send({ message: "User already exists" });
-        }
-    
-        const user = await User.create({
-            username,
-            email,
-            password,
-            picture
-        });
-    
-        if (user) {
-            res.status(201).json({
-                _id: user._id,
-                username: user.username,
-                email: user.mail,
-                picture: user.picture,
-                token: generateToken(user._id)
-            })
-    
-        } else {
-            res.status(400);
-            throw new Error("Failed to create the User");
-        }
-};
 // Get all users
 const getAllUsers = async (req, res, next) => {
 
@@ -94,25 +54,27 @@ const getUsersProfile = async(req, res, next) => {
 // Delete a single document of user
 const deleteSingleUser = async(req, res, next) => {
     
-    const { params } = req;
-    const { userID } = params;
+    // const { params } = req;
+    const { userID } = req.params;
+    console.log(userID);
 
     try {
-        await User.deleteOne({ 'user._id': userID });
-
+        
         const name = User.findOne({}).then((nom) => {
+            console.log(res);
             return res.json({ 
                 userID, 
                 msg:`${nom.name} was deleted successfuly!` 
             })
         });
+        await User.deleteOne({ 'user._id': userID });
+
     } catch (error) {
         next(error);
     }
 }
 
-export{  
-    registerUser, 
+export{
     getAllUsers, 
     getUsersProfile,
     deleteSingleUser

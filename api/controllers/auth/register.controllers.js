@@ -1,12 +1,13 @@
 import { User } from '../../models/user.models.js';
-// import { expressAsyncHandler as asyncHandler } from 'express-async-handler';
 import { generateToken } from '../../config/generateToken.js';
 
-
+// Register user
 const registerUser = async (req, res) => {
     
     // Check all fields are not empty
     const { name, email, password, picture} = req.body;
+
+        console.log(req.body);
     try {
     if (!name || !email || !password) {
         res.status(400);

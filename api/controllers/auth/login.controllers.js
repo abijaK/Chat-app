@@ -12,7 +12,7 @@ const userLogged = async(req, res, next)=> {
 
         if (!user) {
           return  res.json({
-                msg: "Check your name or password",
+                msg: "The email address does not match, plz try again !",
                 status: false });
         }
 
