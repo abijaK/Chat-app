@@ -1,52 +1,51 @@
-const User = require('../models/user.models');
-const asyncHandler = require('express-async-handler');
-const  generateToken  = require('../config/generateToken');
+import { User } from '../models/user.models.js';
+import { generateToken } from '../config/generateToken.js';
 
 // Registration
-const registerUser = asyncHandler(async (req, res) => {
-    const { username, email, password, picture } = req.body;
-
-    if (!username || !email || !password) {
-        res.status(400);
-        throw new Error("Please Enter all the Fields");
-    }
-
-    // Search for email to know if user exists
-    const userExists = await User.findOne({ email });
+const registerUser = async(req, res) => {
     
-    if (userExists) {
-        res.status(400);
-        res.send("User already exists");
-    }
-
-    const user = await User.create({
-        username,
-        email,
-        password,
-        picture
-    });
-
-    if (user) {
-        res.status(201).json({
-            _id: user._id,
-            username: user.username,
-            email: user.mail,
-            picture: user.picture,
-            token: generateToken(user._id)
-        })
-
-    } else {
-        res.status(400);
-        throw new Error("Failed to create the User");
-    }
-});
-
+    const { username, email, password, picture } = req.body;
+   
+        if (!username || !email || !password) {
+            console.log(req.body);
+            return res.status(400).send({ message: "Please complete all the Fields" });
+            // throw new Error("Please complete all the Fields");
+        }
+    
+        // Search for email to know if user exists
+        const userExists = await User.findOne({ email });
+        
+        if (userExists) {
+            res.status(400).send({ message: "User already exists" });
+        }
+    
+        const user = await User.create({
+            username,
+            email,
+            password,
+            picture
+        });
+    
+        if (user) {
+            res.status(201).json({
+                _id: user._id,
+                username: user.username,
+                email: user.mail,
+                picture: user.picture,
+                token: generateToken(user._id)
+            })
+    
+        } else {
+            res.status(400);
+            throw new Error("Failed to create the User");
+        }
+};
 // Get all users
 const getAllUsers = async (req, res, next) => {
 
     try {
         const user = await User.find({
-                $not: [
+                $not: [ 
                     {sender : req.params.id}
                 ]
             });
@@ -112,8 +111,8 @@ const deleteSingleUser = async(req, res, next) => {
     }
 }
 
-export{ 
-    registerUser , 
+export{  
+    registerUser, 
     getAllUsers, 
     getUsersProfile,
     deleteSingleUser

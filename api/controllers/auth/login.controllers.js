@@ -1,7 +1,7 @@
-const User = require("../../models/user.models");
-const  generateToken = require("../../config/generateToken");
-const bcrypt = require("bcryptjs");
-const { deleteMany } = require("../../models/user.models");
+import { User } from "../../models/user.models.js";
+import { generateToken } from "../../config/generateToken.js";
+import bcrypt from "bcryptjs";
+// import { deleteMany } from "../../models/user.models.js";
 
 
 const userLogged = async(req, res, next)=> {

@@ -1,16 +1,16 @@
-const dotenv = require('dotenv');
+import express from 'express';
+import dotenv from 'dotenv';
 dotenv.config();
-const express = require('express');
+import { routes } from './routes/routes.js';
+import { dbConnexion } from './config/dbConnect.js';
+import { endPointNotFound } from './middlewares/error.middlewares.js';
+
+
 const PORT = process.env.PORT || 5000;
-const routes = require('./routes/routes');
-const dbConnexion = require('./config/dbConnect');
-const { endPointNotFound, errorHandler } = require('./middlewares/error.middlewares');
 
 const app = express();
 
 dbConnexion();
-
-app.use(express.json())
 
 
 app.use((req, res, next) => {
@@ -40,6 +40,6 @@ app.use(routes);
 // })
 
 app.use(endPointNotFound)
-app.use(errorHandler)
+// app.use(errorHandler)
 
 app.listen(PORT, ()=>{console.log(`Server started on PORT ${PORT}`)})

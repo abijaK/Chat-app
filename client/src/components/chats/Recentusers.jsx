@@ -1,10 +1,13 @@
 import axios from 'axios'
 import React, { useEffect } from 'react'
 
+// const PROD_URL = process.env.REACT_APP_PROD_URL;
+const BASE_URL = process.env.REACT_APP_BASE_URL;
+
 export function Recentusers({ reciever, setReciever, recentUser, setRecentUser, reciever_name, setReciever_name }) {
   
   useEffect(() => {
-    axios.get("https://gda-chat-app.onrender.com/users")
+    axios.get(`${BASE_URL}/users`)
     .then((response)=> {
       setRecentUser(response.data.user)
       // console.log(response.data.user);

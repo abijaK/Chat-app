@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect } from 'react'
-// const HOST_URL=process.env.BASE_URL;
+// const PROD_URL = process.env.REACT_APP_PROD_URL;
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 export function Discussion({  contents, setContents, reciever, reciever_name, newMessage, setNewMessage }) {
 
@@ -10,7 +11,7 @@ export function Discussion({  contents, setContents, reciever, reciever_name, ne
     // Post sender._id with message's content to the reciever
     const submitHandler = (e) => {
         e.preventDefault();
-        axios.post("https://gda-chat-app.onrender.com/discuss/chats/add/",
+        axios.post(`${BASE_URL}/discuss/chats/add/`,
             {
                 sender:idSender,
                 content:contents,
@@ -20,7 +21,7 @@ export function Discussion({  contents, setContents, reciever, reciever_name, ne
 
     // Show messages by idsender in chatroom
     useEffect(() => {
-        axios.get(`https://gda-chat-app.onrender.com/discuss/chats/show/${idSender}`)
+        axios.get(`${BASE_URL}/discuss/chats/show/${idSender}`)
         .then((response)=>{
             setNewMessage(response.data.message)
             

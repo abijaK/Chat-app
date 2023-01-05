@@ -1,11 +1,10 @@
-const router = require('express').Router();
+import express from 'express'
+const router = express.Router();
 
-const registerUser  = require('../controllers/auth/register.controllers');
-const userLogged = require('../controllers/auth/login.controllers');
-
-const { showMessages, addMessage } = require('../controllers/messages.controllers');
-const { getAllUsers, getUsersProfile, deleteSingleUser } = require('../controllers/user.controllers');
-
+import { userLogged } from '../controllers/auth/login.controllers.js'
+import { registerUser } from '../controllers/auth/register.controllers.js';
+import { showMessages, addMessage } from '../controllers/messages.controllers.js';
+import { getAllUsers, getUsersProfile, deleteSingleUser } from '../controllers/user.controllers.js';
 
 router.post('/auth/user', registerUser);
 
@@ -21,4 +20,4 @@ router.post('/discuss/chats/add/', addMessage);
 
 router.get('/discuss/chats/show/:id', showMessages);
 
-export { router };
+export { router as routes};

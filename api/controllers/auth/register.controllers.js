@@ -1,12 +1,13 @@
-const User = require('../../models/user.models');
-const asyncHandler = require('express-async-handler') 
-const generateToken = require('../../config/generateToken');
+import { User } from '../../models/user.models.js';
+// import { expressAsyncHandler as asyncHandler } from 'express-async-handler';
+import { generateToken } from '../../config/generateToken.js';
 
-const registerUser = asyncHandler(async (req, res) => {
-    const { name, email, password, picture} = req.body;
 
+const registerUser = async (req, res) => {
+    
     // Check all fields are not empty
-   try {
+    const { name, email, password, picture} = req.body;
+    try {
     if (!name || !email || !password) {
         res.status(400);
         throw new Error("Please enter all the fields")
@@ -55,6 +56,6 @@ const registerUser = asyncHandler(async (req, res) => {
         console.log(error);
     }
 
-});
+};
 
 export { registerUser }

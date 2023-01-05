@@ -1,5 +1,6 @@
-const { default: mongoose } = require("mongoose");
-const Message = require("../models/message.models.js");
+// const { default: mongoose } = require("mongoose");
+import mongoose from "mongoose";
+import { Message } from "../models/message.models.js";
 
 // Retrieve all message sended and selected by id 
 const showMessages = async(req, res, next) => {

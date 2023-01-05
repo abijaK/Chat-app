@@ -5,7 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import { FaRegEnvelope, FaEye, FaEyeSlash} from 'react-icons/fa';
-// const HOST_URL=process.env.BASE_URL;
+
+const BASE_URL=process.env.REACT_APP_BASE_URL;
+// const PROD_URL = process.env.REACT_APP_PROD_URL;
 
 export function Login() {
 
@@ -24,7 +26,7 @@ console.log(email,password);
   // Check if user credentials is the same in database
   const submitHandler = (e) => {
     e.preventDefault();
-   axios.post(`localhost:9000/auth/login`,
+   axios.post(`${BASE_URL}/auth/login`,
       {
         email,
         password
