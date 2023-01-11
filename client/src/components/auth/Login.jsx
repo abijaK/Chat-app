@@ -7,7 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { FaRegEnvelope, FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
-// const PROD_URL = process.env.REACT_APP_PROD_URL;
+// const PROD_URL=process.env.REACT_APP_API-URL;
 
 export function Login() {
   const navigate = useNavigate();

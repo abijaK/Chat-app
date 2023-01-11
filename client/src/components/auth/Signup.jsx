@@ -6,8 +6,10 @@ import { MdOutlineDriveFileRenameOutline, MdLockOutline } from 'react-icons/md';
 import { useNavigate } from 'react-router-.dom';
 import { toast, ToastContainer } from 'react-toastify';
 
+import { io } from 'socket.io-client';
+
 const BASE_URL = process.env.REACT_APP_BASE_URL;
-// const PROD_URL = process.env.REACT_APP_PROD_URL;
+const PROD_URL = process.env.REACT_APP_API_URL;
 
 export function Signup() {
   const [showPass, setShowPass] = useState(false);
@@ -69,6 +71,13 @@ export function Signup() {
   //     setImage(reader.result);
   //   };
   // };
+
+  // Implement socket-client here
+  const socket = io(`${PROD_URL}`);
+
+  socket.emit('connection', () => {
+    console.log('Connection is established!');
+  });
 
   return (
     <div

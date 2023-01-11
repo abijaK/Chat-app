@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect } from 'react';
 
-// const PROD_URL = process.env.REACT_APP_PROD_URL;
+// const PROD_URL=process.env.REACT_APP_API-URL;
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 export function Recentusers({ setReciever, recentUser, setRecentUser, setReciever_name }) {

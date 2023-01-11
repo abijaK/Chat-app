@@ -6,9 +6,10 @@ import { dbConnexion } from './config/dbConnect.js';
 import { endPointNotFound } from './middlewares/error.middlewares.js';
 
 
+const app = express();
+
 const PORT = process.env.PORT || 5000;
 
-const app = express();
 
 dbConnexion();
 

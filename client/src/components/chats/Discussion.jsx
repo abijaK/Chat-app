@@ -1,6 +1,6 @@
-import axios from "axios";
-import React, { useEffect } from "react";
-// const PROD_URL = process.env.REACT_APP_PROD_URL;
+import axios from 'axios';
+import React, { useEffect } from 'react';
+// const PROD_URL=process.env.REACT_APP_API-URL;
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 export function Discussion({
@@ -12,7 +12,7 @@ export function Discussion({
   setNewMessage,
 }) {
   // Retrieves from localStorage the id of the current user
-  const idSender = JSON.parse(localStorage.getItem("user")).idSender;
+  const idSender = JSON.parse(localStorage.getItem('user')).idSender;
 
   // Post sender._id with message's content to the reciever
   const submitHandler = (e) => {
@@ -42,7 +42,7 @@ export function Discussion({
       return true;
     } else return false;
   });
-  console.log("my message :", messageFilter);
+  console.log('my message :', messageFilter);
 
   return (
     <div className="w-full p-4 bg-white border rounded-lg shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700">
@@ -59,9 +59,7 @@ export function Discussion({
             <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
               {reciever_name}
             </p>
-            <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-              {/* Online */}
-            </p>
+            <p className="text-sm text-gray-500 truncate dark:text-gray-400">{/* Online */}</p>
           </div>
         </div>
 
@@ -152,6 +150,7 @@ export function Discussion({
                   placeholder="Write your message!"
                   onChange={(e) => setContents(e.target.value)}
                   className="w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 bg-cyan-lightened rounded-md py-3"
+                  id="messages"
                 />
               </form>
 
