@@ -5,14 +5,24 @@ import { routes } from './routes/routes.js';
 import { dbConnexion } from './config/dbConnect.js';
 import { endPointNotFound } from './middlewares/error.middlewares.js';
 
+import cors from 'cors';
+import { createServer } from 'http';
+import { Server } from 'socket.io';
 
 const app = express();
-
 const PORT = process.env.PORT || 5000;
 
+const server = createServer(app);
+// Create an instance of websocket protocole
+const io = new Server(server, {
+    cors:{
+        origin: '*'
+    },
+    methods:['GET', 'POST', 'PUT', 'DELETE']
+});
 
 dbConnexion();
-
+app.use(cors)
 app.use(express.json())
 
 app.use((req, res, next) => {
@@ -27,21 +37,10 @@ app.options(/.*/,(req, res) => {
 
 app.use(routes);
 
-
-// app.use('/auth/user', routes)
-
-// app.use('/api/users', routes)
-
-// app.get('/api/chats', (req,res) => {
-    //     res.send(chats)
-// })
-
-// app.get('/api/chat/:id', (req, res) => {
-//     const oneChat = chats.find((chat) => chat._id === req.params.id)
-//     res.send(oneChat);
-// })
-
 app.use(endPointNotFound)
-// app.use(errorHandler)
+
+    io.on('connection', (socket) => {
+        console.log('Connexion etablie !', socket.id);
+    })
 
 app.listen(PORT, ()=>{console.log(`Server started on PORT ${PORT}`)})
