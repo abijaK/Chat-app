@@ -10,7 +10,7 @@ router.post('/auth/user', registerUser);
 
 router.post('/auth/login', userLogged);
 
-router.get('/users', getAllUsers);
+router.get('/users/', getAllUsers);
 
 router.get('/users/profile', getUsersProfile);
 

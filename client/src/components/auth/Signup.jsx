@@ -3,7 +3,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { FaRegEnvelope, FaEyeSlash, FaEye } from 'react-icons/fa';
 import { MdOutlineDriveFileRenameOutline, MdLockOutline } from 'react-icons/md';
-import { useNavigate } from 'react-router-.dom';
+import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 
 import { io } from 'socket.io-client';
