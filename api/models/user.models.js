@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
-const mongooseUniqueValid = require('mongoose-unique-validator');
+import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
+import mongooseUniqueValid from 'mongoose-unique-validator';
 
     const userModel = mongoose.Schema({
 
@@ -36,4 +36,4 @@ mongoose.plugin(mongooseUniqueValid);
 
 const User = mongoose.model('User', userModel);
 
-module.exports = User;
+export { User };

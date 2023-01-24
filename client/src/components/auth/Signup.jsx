@@ -5,6 +5,9 @@ import { MdOutlineDriveFileRenameOutline, MdLockOutline } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 
+const BASE_URL=process.env.REACT_APP_BASE_URL;
+// const PROD_URL = process.env.REACT_APP_PROD_URL;
+
 export function Signup() {
 
   const [showPass, setShowPass] = useState(false)
@@ -25,7 +28,7 @@ export function Signup() {
 
   // Send registration to the backend
   const submitHandler = () => {
-    axios.post("https://gda-chat-app.onrender.com/auth/user",
+    axios.post(`${BASE_URL}/auth/user`,
       {
         name,
         email,

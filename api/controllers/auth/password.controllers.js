@@ -1,8 +1,8 @@
-const generateToken = require('../../config/generateToken');
-const asyncHandler = require('express-async-handler');
-const User = require('../models/user.models');
+import generateToken from ('../../config/generateToken');
+import asyncHandler from ('express-async-handler');
+import User from ('../models/user.models');
 
-exports.userAuth = asyncHandler(async(req, res) =>{
+const userAuth = asyncHandler(async(req, res) =>{
         const { email, password } = req.body;
 
         const user = await User.findOne({ email });
@@ -21,3 +21,5 @@ exports.userAuth = asyncHandler(async(req, res) =>{
             throw new Error("Invalid Email or Password")
         }
 });
+
+export { userAuth }
